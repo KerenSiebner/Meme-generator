@@ -10,9 +10,21 @@
 </head>
 
 <body onload="onInit()">
-   <section class = "gallary"></section>
-   <section class = "editor"></section>
+    <section class="gallary">
+        <img src="img/1.jpg" data-img-id="1" class="img img1">
+        <img src="img/2.jpg" data-img-id="2" class="img img2">
+
+    </section>
+    <section class="editor">
+        <div class="canvas-container">
+            <canvas id="my-canvas" height="450" width="450" onclick="draw(event)"> </canvas>
+        </div>
+        <input type="text" onchange="setLineTxt(this.value)">
+    </section>
     <script src="js/main.js"></script>
+    <script src="js/gallary-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
+    <script src="js/meme-service.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,25 @@
+.editor {
+}
+
+
+.gallary {}
+
+.img {
+    /* Style for "Calque 10" */
+    width: 200px;
+    height: 173px;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    outline:1px solid #234985;
+    background-color: white;
+}
+
+.canvas-container{
+    width: 476px;
+    height: 546px;
+    background-color: #22252c;
+    margin: 0 auto;
+}
