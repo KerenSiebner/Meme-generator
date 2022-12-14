@@ -10,27 +10,53 @@
 </head>
 
 <body onload="onInit()">
-    <section class="gallary">
-        <img src="img/1.jpg" data-img-id="1" class="img img1">
-        <img src="img/2.jpg" data-img-id="2" class="img img2">
+    <header>
+        <h1 class="logo">LOGO</h1>
+        <span></span>
+        <div class="nav-btn gallery-btn" onclick="onSwitchToGallery()">Gallery</div>
+        <div class="nav-btn about-btn">About</div>
+        <!-- <div class="nav">
+        </div> -->
+    </header>
 
+
+
+    <section class="gallery-section">
+        <form id="search" role="search">
+            <input type="search" class="search-input" name="search" placeholder="Search">
+            <!-- <input value="Submit" type="submit"> -->
+        </form>
+        <div class="gallery"></div>
     </section>
     <section class="editor">
         <div class="canvas-container">
             <canvas id="my-canvas" height="450" width="450" onclick="draw(event)"> </canvas>
         </div>
-        <!-- <input type="text" class ="txt-input" onchange="onSetLineTxt(this.value,event)"> -->
-        <input type="text" class ="inputTxt">
-        <input type="color" class="font-btn" onchange="onSetFontColor(this.value)">
-        <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A+</button>
-        <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A-</button>
-        <button class="line-ctrl-btn add-line-btn" onclick="onAddLine()">+</button>
-        <button class="line-ctrl-btn switch-line-btn" onclick="onSwitchLine()">&#x21c5;</button>
+        <div class="canvas-ctl">
+            <input type="text" class="inputTxt" placeholder="TEXT LINE">
+            <div class="line-ctrl">
+                <button class="line-ctrl-btn add-line-btn" onclick="onAddLine()">+</button>
+                <button class="line-ctrl-btn switch-line-btn" onclick="onSwitchLine()">&#x21c5;</button>
+            </div>
+            <div class="font-design">
+                <button class="font-btn">
+                    <input type="color" class="color-pick" onchange="onSetFontColor(this.value)">
+                </button>
+                <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A+</button>
+                <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A-</button>
+            </div>
+            <div class="stickers">STICKERS GO HERE</div>
+            <div class="meme-ctrl">
+                <button class="meme-ctrl-btn save-btn" onclick="onSave()">SAVE</button>
+                <button class="meme-ctrl-btn download-btn" onclick="onDownload()">DOWNLOAD</button>
+                <button class="meme-ctrl-btn share-btn" onclick="onShare()">SHARE</button>
+            </div>
+        </div>
     </section>
     <script src="js/main.js"></script>
-    <script src="js/gallary-controller.js"></script>
-    <script src="js/meme-controller.js"></script>
     <script src="js/meme-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
 </body>
 
 </html>

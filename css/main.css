@@ -1,14 +1,108 @@
-.editor {}
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: poppins;
+    src: url(/fonts/Poppins/Poppins-Black.ttf)
+}
+
+html {
+    font-family: poppins;
+    background-color: #22252c;
+}
+
+.editor {
+    display: none;
+}
+
+header {
+    width: 98vw;
+    height: 73px;
+    border-radius: 37px;
+    background-color: #5970c1;
+    background-image: linear-gradient(-86deg, #33be6d 0%, #0c98b9 100%);
+    margin-bottom: 16px;
+    padding: 15px 25px 0 25px;
+    /* flex-direction: row; */
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+}
+
+.logo {
+    width: 10%;
+    margin: 0 0 0;
+}
+
+.nav {
+    width: 30vw;
+    margin: 0 0;
+    display: inline-block
+}
+
+.nav-btn {
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1.3125em;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    /* Text style for "About" */
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: normal;
+}
+
+.gallery-btn {
+    margin-right: 40px;
+}
+.gallery-btn:hover{
+    cursor: pointer;
+}
 
 
-.gallary {}
+.search-input {
+    width: 541px;
+    height: 58px;
+    border-radius: 29px;
+    background-color: #22252c;
+    margin-bottom: 16px;
+    font-family: inherit;
+    font-size: 1.3125em;
+    padding-left: 2em;
+    font-weight: 100;
 
-.txt-input {
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    margin-right: 70px;
+    margin-left: 70px;
+
+}
+
+.img {
+    border-radius: 10px;
+    width: 200px;
+    height: 173px;
+}
+
+.inputTxt {
     width: 445px;
     height: 57px;
     box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
     border-radius: 28px;
     background-color: #ebeef3;
+    font-family: poppins;
+    color: #3d3d3d;
+    font-size: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 25px;
 }
 
 .line-ctrl-btn {
@@ -18,13 +112,16 @@
 }
 
 .font-btn {
-    /* Style for "Rectangle" */
     width: 56px;
     height: 51px;
     border-radius: 10px;
     box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.58);
     background-color: #ffffff;
     background-color: #ffffff;
+}
+
+.color-pick {
+    opacity: 0%;
 }
 
 .switch-line-btn {
@@ -49,11 +146,52 @@ canvas {
     margin: 0 auto;
     outline: 1px solid #234985;
     background-color: white;
+    border-radius: 10px;
 }
 
 .canvas-container {
-    width: 476px;
+    flex-basis: 50%;
     height: 546px;
     background-color: #22252c;
     /* margin: 0 auto; */
+}
+
+.canvas-ctrl {
+    flex-basis: 45%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 2fr 1fr 1fr;
+    height: 546px;
+    border-radius: 20px;
+    background-color: #ebeef3;
+}
+
+div.canvas-ctrl>* {
+    margin-bottom: 25px;
+}
+
+.font-design {
+    margin-bottom: 25px;
+}
+
+.line-ctrl {
+    margin-bottom: 25px;
+}
+
+.stickers {
+    width: 445px;
+    height: 91px;
+    border-radius: 45px;
+    background-color: #ffffff;
+    text-align: center;
+    margin-bottom: 25px;
+    ;
+}
+
+.meme-ctrl-btn {
+    width: 115px;
+    height: 51px;
+    box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff;
+    border-radius: 15px;
+    background-color: #1e7cd3;
 }

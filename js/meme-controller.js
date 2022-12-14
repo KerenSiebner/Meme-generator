@@ -5,14 +5,14 @@ let gCtx
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
-    addEventListeners()
     renderMeme()
-    renderGallary()
+    renderGallery()
+    addEventListeners()
 }
 
 function addEventListeners(){
-    const inputTxt = document.querySelector('.inputTxt')
-    inputTxt.addEventListener('.inputTxt',onSetLineTxt)
+    const input = document.querySelector('.inputTxt')
+    input.addEventListener('input',onSetLineTxt)
     // console.log('inputTxt.value', inputTxt.value)
 }
 
@@ -24,7 +24,7 @@ function renderMeme() {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         const linesTxt = getTxtLines()
         if (!linesTxt) return
-        console.log('gElCanvas', gElCanvas) 
+        // console.log('gElCanvas', gElCanvas) 
         linesTxt.reduce((acc, lineTxt) => {
             // if(acc>(gElCanvas.height-100)) return alert('No more text can be added!')
             drawText(`${lineTxt}`, 100, 100 + acc)
@@ -34,8 +34,10 @@ function renderMeme() {
 }
 function onSetLineTxt(ev) {
     // ev.preventDefault()
-    console.log('ev.target.value', ev.target.value)
-    setLineTxt(ev.taget.value)
+    console.log('ev', ev)
+    const txt = ev.target.value
+    setLineTxt(`${txt}`)
+    // drawText(`${txt}`, 100, 100)
     //TODO-4 render the Meme according to the input text
     renderMeme()
 }
@@ -58,4 +60,9 @@ function onAddLine() {
 function onSwitchLine(){
     switchLine()
     renderMeme()
+}
+
+function onSave(){
+    gIsGallary=true
+    toggleDisplayEditorOrGallary()
 }
