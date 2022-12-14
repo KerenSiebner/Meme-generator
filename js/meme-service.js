@@ -26,18 +26,18 @@ function getMeme() {
     return gMeme
 }
 
-function getImg(){
+function getImg() {
     const imgIdx = gMeme.selectedImgId
-    const imgSelected = gImgs.find(({id})=>id === imgIdx)
+    const imgSelected = gImgs.find(({ id }) => id === imgIdx)
     const imgUrl = imgSelected.url
     return imgUrl
 }
 
-function getImgs(){
+function getImgs() {
     return gImgs
 }
 
-function getTxt(){
+function getTxt() {
     const txtLine = gMeme.lines[0].txt
     return txtLine
 }
@@ -45,15 +45,23 @@ function getTxt(){
 //TODO-3 update gMeme from user input
 function setLineTxt(inputTxt) {
     gMeme.lines[0].txt = inputTxt
-    //TODO-4 render the Meme according to the input text
-    renderMeme()
+}
+
+function setFontColor(color) {
+    gMeme.lines[0].color = color
+}
+
+function setFontSize(fontChangeSize) {
+    //if increase
+    if (fontChangeSize.dataset.fsize === '+') { gMeme.lines[0].size += 5 }
+    else { gMeme.lines[0].size -= 5 }
 }
 
 function drawText(text, x, y) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = "40px impact";
+    gCtx.fillStyle = gMeme.lines[0].color
+    gCtx.font = `${gMeme.lines[0].size}px impact`;
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
@@ -66,7 +74,7 @@ function drawText(text, x, y) {
 function onImgSelect(img) {
     const imgId = +img.dataset.id
     console.log('imgId', imgId)
-    const selectedImg = gImgs.find(img => img.id===imgId)
-    gMeme.selectedImgId=selectedImg.id
+    const selectedImg = gImgs.find(img => img.id === imgId)
+    gMeme.selectedImgId = selectedImg.id
     renderMeme()
 }
