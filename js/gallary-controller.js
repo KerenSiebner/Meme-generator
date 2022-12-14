@@ -12,3 +12,13 @@ function renderGallary() {
     elGallary.innerHTML = strHTMLs.join()
 }
 
+//TO-DO-6 when selecting img from gallary using funciton bellow
+
+function onImgSelect(img) {
+    const imgId = +img.dataset.id
+    const selectedImg = gImgs.find(img => img.id === imgId)
+    gMeme.selectedImgId = selectedImg.id
+    clearCanvasLines()
+    clearInputTxt()
+    renderMeme()
+}

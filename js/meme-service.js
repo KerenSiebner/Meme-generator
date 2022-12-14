@@ -11,14 +11,7 @@ var gImgs = [
 var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
-    lines: [
-        {
-            txt:'',
-            size: 20,
-            align: 'left',
-            color: 'red'
-        }
-    ]
+    lines: []
 }
 
 // TODO-2 
@@ -38,7 +31,7 @@ function getImgs() {
 }
 
 function getTxtLines() {
-    if(gMeme.lines[0].txt==='') return null
+    if(gMeme.lines===[]) return null
     const txtLines = gMeme.lines.map(line => line.txt)
     console.log('txtLines', txtLines)
     return txtLines
@@ -46,8 +39,7 @@ function getTxtLines() {
 
 //TODO-3 update gMeme from user input
 function setLineTxt(inputTxt) {
-    if (gMeme.lines[0].txt==='') gMeme.lines[0].txt = inputTxt
-    else gMeme.lines.push(_createLine(inputTxt))
+    gMeme.lines.push(_createLine(inputTxt))
 }
 
 function _createLine(txt){
@@ -61,10 +53,21 @@ function _createLine(txt){
 }
 
 function addLine(){
-    const newLineIdx = gMeme.lines.length 
-    clearInputTxt()
-
+    clearInputTxt()   
 }
+
+function switchLine(){
+    const numberOfLines = gMeme.lines.length
+    if (numberOfLines<1) return
+    else {
+        //switch between first and last line
+        const firstLine = gMeme.lines[0]
+        const lastLine = gMeme.lines[numberOfLines-1]
+        gMeme.lines[0] = lastLine
+        gMeme.lines[numberOfLines-1] = firstLine
+    }
+}
+
 function clearInputTxt(){
     var elTxt = document.querySelector('.txt-input')
     console.log('elTxt.value', elTxt.value)
@@ -95,12 +98,6 @@ function drawText(text, x, y) {
     // gCtx.closePath()
 }
 
-//TO-DO-6 when selecting img from gallary using funciton bellow
-
-function onImgSelect(img) {
-    const imgId = +img.dataset.id
-    console.log('imgId', imgId)
-    const selectedImg = gImgs.find(img => img.id === imgId)
-    gMeme.selectedImgId = selectedImg.id
-    renderMeme()
+function clearCanvasLines(){
+    gMeme.lines= []
 }
