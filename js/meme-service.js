@@ -13,7 +13,7 @@ var gMeme = {
     selectedLineIdx: 0,
     lines: [
         {
-            txt: 'I sometimes eat Falafel',
+            txt:'',
             size: 20,
             align: 'left',
             color: 'red'
@@ -37,14 +37,38 @@ function getImgs() {
     return gImgs
 }
 
-function getTxt() {
-    const txtLine = gMeme.lines[0].txt
-    return txtLine
+function getTxtLines() {
+    if(gMeme.lines[0].txt==='') return null
+    const txtLines = gMeme.lines.map(line => line.txt)
+    console.log('txtLines', txtLines)
+    return txtLines
 }
 
 //TODO-3 update gMeme from user input
 function setLineTxt(inputTxt) {
-    gMeme.lines[0].txt = inputTxt
+    if (gMeme.lines[0].txt==='') gMeme.lines[0].txt = inputTxt
+    else gMeme.lines.push(_createLine(inputTxt))
+}
+
+function _createLine(txt){
+    return  line=
+        {
+            txt,
+            size: 30,
+            align: 'center',
+            color: 'white'
+        }
+}
+
+function addLine(){
+    const newLineIdx = gMeme.lines.length 
+    clearInputTxt()
+
+}
+function clearInputTxt(){
+    var elTxt = document.querySelector('.txt-input')
+    console.log('elTxt.value', elTxt.value)
+    if (elTxt.value!="") elTxt.value=""
 }
 
 function setFontColor(color) {
@@ -58,15 +82,17 @@ function setFontSize(fontChangeSize) {
 }
 
 function drawText(text, x, y) {
+    // gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = gMeme.lines[0].color
     gCtx.font = `${gMeme.lines[0].size}px impact`;
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
-
+    
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    // gCtx.closePath()
 }
 
 //TO-DO-6 when selecting img from gallary using funciton bellow

@@ -15,7 +15,10 @@ function renderMeme() {
     elImg.src = getImg() // Send a network req to get that image, define the img src
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText(getTxt(), 100, 100)
+        const linesTxt = getTxtLines()
+        if(!linesTxt) return
+        console.log('lines[0]', linesTxt[0])
+        linesTxt.forEach(lineTxt => drawText(`${lineTxt}`, 100, 100))
     }
 }
 function onSetLineTxt(txt) {
@@ -34,6 +37,7 @@ function onSetFontSize(fontChangeSize) {
     renderMeme()
 }
 
-function onAddLine(){
-    
+function onAddLine() {
+    addLine()
+    renderMeme()
 }
