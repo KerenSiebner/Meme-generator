@@ -1,11 +1,13 @@
 'use-strict'
 
+var gFocusRect = {}
+
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var gImgs = [
     { id: 1, url: 'img/1.jpg', keywords: ['trump', 'politics'] },
     { id: 2, url: 'img/2.jpg', keywords: ['puppy', 'pets'] },
-    { id: 3, url: 'img/3.jpg', keywords: ['puppy', 'pets','baby'] },
+    { id: 3, url: 'img/3.jpg', keywords: ['puppy', 'pets', 'baby'] },
     { id: 4, url: 'img/4.jpg', keywords: ['cat', 'pets'] },
     { id: 5, url: 'img/5.jpg', keywords: ['baby', 'funny'] },
     { id: 6, url: 'img/6.jpg', keywords: ['funny', 'comady'] },
@@ -83,7 +85,7 @@ function switchLine() {
 
 function clearInputTxt() {
     var elTxt = document.querySelector('.inputTxt')
-    console.log('elTxt.value', elTxt.value)
+    // console.log('elTxt.value', elTxt.value)
     if (elTxt.value != "") elTxt.value = ""
 }
 
@@ -109,12 +111,29 @@ function drawText(text, x, y) {
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
     // gCtx.closePath()
+    const textWidth = gCtx.measureText(text).width + 10;
+    const textHeight = gCtx.measureText(text).fontBoundingBoxAscent
+        + gCtx.measureText(text).fontBoundingBoxDescent;
+
+    // if (gFocusRect && text.length === 1)
+    gFocusRect.startX = x - textWidth / 2
+    gFocusRect.startY = y - textHeight / 2
+    gFocusRect.endX = textWidth
+    gFocusRect.endY = textHeight
+
+    // drawFocusRect(x - textWidth * 0.5, y - 0.5 * textHeight, textWidth, textHeight)
 }
 
 function clearCanvasLines() {
     gMeme.lines = []
 }
 
-function createImgs(){
+// function createImgs() {
 
+// }
+
+function drawFocusRect(x, y, textWidth, textHeight) {
+    gCtx.strokeStyle = 'grey'
+    gCtx.strokeRect(x, y, textWidth, textHeight)
+    // return gFocusRect
 }

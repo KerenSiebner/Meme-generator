@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: poppins;
+    src: url(/fonts/Poppins/Poppins-Black.ttf)
+}
+
+@font-face {
+    font-family: poppins-light;
+    src: url(/fonts/Poppins/Poppins-Light.ttf)
+}
+
+html {
+    font-family: poppins;
+    background-color: #22252c;
+}

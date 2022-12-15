@@ -10,10 +10,10 @@ function onInit() {
     addEventListeners()
 }
 
-function addEventListeners(){
+function addEventListeners() {
     const input = document.querySelector('.inputTxt')
-    input.addEventListener('input',onSetLineTxt)
-    // console.log('inputTxt.value', inputTxt.value)
+    input.addEventListener('input', onSetLineTxt)
+    input.addEventListener('input', preventEnterSubmit)
 }
 
 //TODO-1: render image on the canvas and a line of text on top
@@ -23,13 +23,31 @@ function renderMeme() {
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
         const linesTxt = getTxtLines()
+        console.log('linesTxt', linesTxt)
         if (!linesTxt) return
-        // console.log('gElCanvas', gElCanvas) 
+        // drawText(`${linesTxt[0]}`, gElCanvas.width*0.5, 100)
+        // if (!linesTxt[1]) return
+        // drawText(`${linesTxt[1]}`, gElCanvas.width*0.5, gElCanvas.height-100)
+        // console.log('gElCanvas', gElCanvas)
+
+        // for (var i=0; i<linesTxt.length; i++){
+        //     console.log('i', i)
+        //     const lineTxt = linesTxt[i]
+        //     if (i=0) drawText(`${lineTxt}`, gElCanvas.width*0.5, 100)
+        //     else if (i=1) drawText(`${lineTxt}`, gElCanvas.width*0.5, gElCanvas.height-100)
+        //     else  drawText(`${lineTxt}`, gElCanvas.width*0.5, gElCanvas.height*0.5)
+        // }
+
+
         linesTxt.reduce((acc, lineTxt) => {
-            // if(acc>(gElCanvas.height-100)) return alert('No more text can be added!')
-            drawText(`${lineTxt}`, 100, 100 + acc)
-            return acc + 100
-        }, 0)
+            console.log('acc', acc)
+            drawText(`${lineTxt}`, gElCanvas.width * 0.5, acc)
+            if (acc = 100) acc = gElCanvas.height - 100
+            else if (acc = gElCanvas.height - 100) acc = gElCanvas.height * 0.5
+            const { startX, startY, endX, endY } = gFocusRect
+            drawFocusRect(startX, startY, endX, endY)
+            return acc
+        }, 100)
     }
 }
 function onSetLineTxt(ev) {
@@ -57,12 +75,16 @@ function onAddLine() {
     renderMeme()
 }
 
-function onSwitchLine(){
+function onSwitchLine() {
     switchLine()
     renderMeme()
 }
 
-function onSave(){
-    gIsGallary=true
+function onSave() {
+    gIsGallary = true
     toggleDisplayEditorOrGallary()
+}
+
+function preventEnterSubmit(ev) {
+    ev.preventDefault()
 }
