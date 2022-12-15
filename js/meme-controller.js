@@ -32,8 +32,13 @@ function renderMeme() {
             else if (acc === (gElCanvas.height - 100)) acc = gElCanvas.height * 0.5
             return acc
         }, 100)
-        const { startX, startY, endX, endY } = gFocusRect
-        drawFocusRect(startX, startY, endX, endY)
+        // if(gFocusRects!== []){
+        //     const selectedLineIdx = +gMeme.selectedLineIdx
+        //     console.log('gFocusRects[selectedLineIdx]', gFocusRects[0])
+            // const {startX, startY, endX, endY} = gFocusRects[selectedLineIdx]
+            const {startX, startY, endX, endY} = gFocusRect
+            drawFocusRect(startX, startY, endX, endY)
+        // }
     }
 }
 function onSetLineTxt(ev) {
@@ -57,7 +62,15 @@ function onSetFontSize(fontChangeSize) {
 }
 
 function onAddLine() {
+    gFocusRects.push(gFocusRect)
+    gFocusRect = {}
     addLine()
+    renderMeme()
+    console.log('gFocusRects', gFocusRects)
+}
+
+function onSwitchFocusLine() {
+    switchFocusLine()
     renderMeme()
 }
 
@@ -73,4 +86,32 @@ function onSave() {
 
 function preventEnterSubmit(ev) {
     ev.preventDefault()
+}
+
+function onMoveUp(){
+    moveUp()
+    renderMeme()
+}
+
+function onMoveDown(){
+    moveDown()
+    renderMeme()
+}
+
+function onDownload(elLink){
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    elLink.href = imgContent
+}
+
+function onShare(){
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
+
+    // A function to be called if request succeeds
+    function onSuccess(uploadedImgUrl) {
+        // Encode the instance of certain characters in the url
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    // Send the image to the server
+    shareImg(imgDataUrl, onSuccess)
 }

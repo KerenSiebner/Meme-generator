@@ -1,6 +1,7 @@
 'use-strict'
 
 var gFocusRect = {}
+var gFocusRects = []
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
@@ -63,12 +64,14 @@ function _createLine(txt) {
         txt,
         size: 30,
         align: 'center',
-        color: 'white'
+        color: 'white',
     }
 }
 
 function addLine() {
     clearInputTxt()
+    const memeLines = gMeme.lines
+    memeLines[memeLines.length-1].isSelected=false
 }
 
 function switchLine() {
@@ -121,6 +124,7 @@ function drawText(text, x, y) {
     gFocusRect.endX = textWidth
     gFocusRect.endY = textHeight
 
+
     // drawFocusRect(x - textWidth * 0.5, y - 0.5 * textHeight, textWidth, textHeight)
 }
 
@@ -137,3 +141,38 @@ function drawFocusRect(x, y, textWidth, textHeight) {
     gCtx.strokeRect(x, y, textWidth, textHeight)
     // return gFocusRect
 }
+
+function moveUp() {
+    const selectedLineIdx = gMeme.selectedLineIdx
+
+}
+
+function moveDown() {
+
+}
+
+
+function switchFocusLine() {
+}
+
+
+
+
+
+
+
+// const newFocusRect = gFocusRects[0]
+// const { startX, startY, endX, endY } =newFocusRect
+// gFocusRect.startX=startX
+// gFocusRect.startY=startY
+// gFocusRect.endX=endX
+// gFocusRect.endY=endY
+// console.log('newFocusRect', newFocusRect)
+// console.log('gFocusRects', gFocusRects)
+// console.log('gFocusRect', gFocusRect)
+
+// const txtLines = getTxtLines()
+// console.log('txtLines', txtLines)
+// const newTxtLinesOrder = txtLines.reverse()
+// console.log('newTxtLinesOrder', newTxtLinesOrder)
+// gMeme.lines = newTxtLinesOrder

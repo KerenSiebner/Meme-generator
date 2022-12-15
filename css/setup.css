@@ -12,7 +12,16 @@
     src: url(/fonts/Poppins/Poppins-Light.ttf)
 }
 
+@font-face {
+    font-family: fa;
+    src: url("/fonts/fa/fa-brands-400.ttf");
+}
+
 html {
     font-family: poppins;
     background-color: #22252c;
+}
+
+i{
+    color:black
 }

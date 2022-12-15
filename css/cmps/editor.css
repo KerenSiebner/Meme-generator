@@ -25,20 +25,25 @@
     width: 57px;
     height: 53px;
     border-radius: 10px;
+    font-family: poppins-light;
+    font-size: xx-large;
 }
 
 .font-btn {
     width: 56px;
     height: 51px;
+    font-family: poppins;
+    font-size: large;
     border-radius: 10px;
     box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.58);
-    background-color: #ffffff;
     background-color: #ffffff;
 }
 
 .color-pick {
     opacity: 0%;
 }
+
+
 
 .switch-line-btn {
     box-shadow: 1px 5px 0 #048b97, 0;
@@ -113,6 +118,12 @@ div.canvas-ctrl>* {
     border-radius: 15px;
     background-color: #1e7cd3;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 
 @media (max-width: 940px) {
