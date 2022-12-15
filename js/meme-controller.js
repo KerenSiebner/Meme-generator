@@ -25,29 +25,15 @@ function renderMeme() {
         const linesTxt = getTxtLines()
         console.log('linesTxt', linesTxt)
         if (!linesTxt) return
-        // drawText(`${linesTxt[0]}`, gElCanvas.width*0.5, 100)
-        // if (!linesTxt[1]) return
-        // drawText(`${linesTxt[1]}`, gElCanvas.width*0.5, gElCanvas.height-100)
-        // console.log('gElCanvas', gElCanvas)
-
-        // for (var i=0; i<linesTxt.length; i++){
-        //     console.log('i', i)
-        //     const lineTxt = linesTxt[i]
-        //     if (i=0) drawText(`${lineTxt}`, gElCanvas.width*0.5, 100)
-        //     else if (i=1) drawText(`${lineTxt}`, gElCanvas.width*0.5, gElCanvas.height-100)
-        //     else  drawText(`${lineTxt}`, gElCanvas.width*0.5, gElCanvas.height*0.5)
-        // }
-
-
         linesTxt.reduce((acc, lineTxt) => {
             console.log('acc', acc)
             drawText(`${lineTxt}`, gElCanvas.width * 0.5, acc)
-            if (acc = 100) acc = gElCanvas.height - 100
-            else if (acc = gElCanvas.height - 100) acc = gElCanvas.height * 0.5
-            const { startX, startY, endX, endY } = gFocusRect
-            drawFocusRect(startX, startY, endX, endY)
+            if (acc === 100) acc = gElCanvas.height - 100
+            else if (acc === (gElCanvas.height - 100)) acc = gElCanvas.height * 0.5
             return acc
         }, 100)
+        const { startX, startY, endX, endY } = gFocusRect
+        drawFocusRect(startX, startY, endX, endY)
     }
 }
 function onSetLineTxt(ev) {
