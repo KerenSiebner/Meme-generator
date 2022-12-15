@@ -1,0 +1,7 @@
+.fa::before {
+    font-family: fa;
+}
+
+.fa.plus::before {
+    content: "\2b";
+}

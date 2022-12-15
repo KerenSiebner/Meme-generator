@@ -10,11 +10,19 @@
 </head>
 
 <body onload="onInit()">
-    <header>
+    <header class="main-header">
         <h1 class="logo">LOGO</h1>
         <span></span>
-        <div class="nav-btn gallery-btn" onclick="onSwitchToGallery()">Gallery</div>
-        <div class="nav-btn about-btn">About</div>
+        <!-- <div class="nav-btn gallery-btn" onclick="onSwitchToGallery()">Gallery</div>
+        <div class="nav-btn about-btn">About</div> -->
+        <nav class="main-nav">
+            <ul class="flex clean-list nav-list">
+                <li><a href="#">Gallary</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <button class="menu-toggle-btn" onclick="toggleMenu()">☰</button>
+
         <!-- <div class="nav">
         </div> -->
     </header>
@@ -36,24 +44,35 @@
         <div class="canvas-ctrl">
             <input type="text" class="inputTxt" placeholder="TEXT LINE">
             <div class="line-ctrl">
-                <button class="line-ctrl-btn add-line-btn" onclick="onAddLine()">+</button>
+                <button class="line-ctrl-btn add-line-btn fa plus" onclick="onAddLine()">+</button>
                 <button class="line-ctrl-btn switch-focus-line-btn" onclick="onSwitchFocusLine()">&#x21c5;</button>
                 <button class="line-ctrl-btn switch-line-btn" onclick="onSwitchLine()">&#8618;</button>
                 <button class="line-ctrl-btn move-up-btn" onclick="onMoveUp()">&#8593;</button>
                 <button class="line-ctrl-btn move-down-btn" onclick="onMoveDown()">&#8595;</button>
             </div>
             <div class="font-design">
-                <button class="font-btn">
-                    <input type="color" class="color-pick fa-solid fa-palette" onchange="onSetFontColor(this.value)">
-                </button>
+                <!-- <button class="font-btn"> -->
+                <!-- <label for="color-pick">
+                    <span>&#127912;</span> -->
+                <!-- <i class="fa-solid fa-plus"></i> -->
+                <!-- </label> -->
+                <!-- </button> -->
                 <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A+</button>
                 <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A-</button>
+                <!-- <button class="font-btn" onclick="onSetFontFamily(this)" data-ffamily="-">A-</button> -->
+                <label for="font-select"></label>
+                <select name="font-family" class="font-select">
+                    <option value="impact">IMPACT</option>
+                    <option value="serif">SERIF</option>
+                    <option value="arial">ARIAL</option>
+                </select>
+                <input type="color" class="font-btn  color-pick" onchange="onSetFontColor(this.value)">
             </div>
             <div class="stickers">STICKERS GO HERE</div>
             <div class="meme-ctrl">
                 <button class="meme-ctrl-btn save-btn" onclick="onSave()">SAVE</button>
                 <button class="meme-ctrl-btn download-btn">
-                    <a href="#"  onclick="onDownload(this)" download="my-img.jpg">DOWNLOAD</a>
+                    <a href="#" onclick="onDownload(this)" download="my-img.jpg">DOWNLOAD</a>
                 </button>
                 <button class="meme-ctrl-btn share-btn" onclick="onShare()">SHARE</button>
             </div>

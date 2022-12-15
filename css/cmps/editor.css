@@ -39,10 +39,6 @@
     background-color: #ffffff;
 }
 
-.color-pick {
-    opacity: 0%;
-}
-
 
 
 .switch-line-btn {
@@ -119,12 +115,28 @@ div.canvas-ctrl>* {
     background-color: #1e7cd3;
 }
 
+
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
+.color-pick{
+    position:absolute
+    
+}
 
+.font-select{
+font-family: poppins-light;
+font-size: x-large;
+width: 236px;
+height: 50px;
+box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+border-radius: 10px;
+background-color: #ffffff;
+
+}
 
 @media (max-width: 940px) {
     .editor {

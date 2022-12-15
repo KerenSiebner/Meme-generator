@@ -2,6 +2,7 @@
 
 var gFocusRect = {}
 var gFocusRects = []
+var gNumberOfLinesEdited = 0
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
@@ -22,6 +23,24 @@ var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
     lines: []
+    //     {
+    //     txt:'TEXT GOES HERE',
+    //     size: 30,
+    //     align: 'center',
+    //     color: 'white',
+    //     fontFamily: 'impact',
+    //     x,
+    //     y
+    // },
+    // {
+    //     txt:'TEXT GOES HERE',
+    //     size: 30,
+    //     align: 'center',
+    //     color: 'white',
+    //     fontFamily: 'impact',
+    //     x,
+    //     y
+    // }]
 }
 
 // TODO-2 
@@ -51,27 +70,39 @@ function getTxtLines() {
 function setLineTxt(inputTxt) {
     //first letter create new line
     if (inputTxt.length === 1) {
-        gMeme.lines.push(_createLine(inputTxt.toUpperCase()))
+        const numberOfLines = gMeme.lines.length
+        let x = gElCanvas.width * 0.5
+        let y = gElCanvas.height / 2
+        if (numberOfLines === 0) y = 100
+        else if (numberOfLines === 1) y = gElCanvas.height - 100
+        gMeme.lines.unshift(_createLine(inputTxt.toUpperCase(), x, y))
     } else {
-        const lastLineIdx = gMeme.lines.length - 1
-        gMeme.lines[lastLineIdx].txt = inputTxt.toUpperCase()
+        // const lastLineIdx = gMeme.lines.length - 1
+        gMeme.lines[0].txt = inputTxt.toUpperCase()
     }
 }
 
-function _createLine(txt) {
+// if (i = 0) drawText(`${linesTxt[i]}`, gElCanvas.width * 0.5, 100)
+// else if (i = 1) drawText(`${linesTxt[i]}`, gElCanvas.width * 0.5, gElCanvas.height - 100)
+
+function _createLine(txt, x, y) {
     return line =
     {
         txt,
         size: 30,
         align: 'center',
         color: 'white',
+        fontFamily: 'impact',
+        x,
+        y
     }
 }
 
 function addLine() {
+    gNumberOfLinesEdited++
     clearInputTxt()
     const memeLines = gMeme.lines
-    memeLines[memeLines.length-1].isSelected=false
+    memeLines[memeLines.length - 1].isSelected = false
 }
 
 function switchLine() {
@@ -107,25 +138,12 @@ function drawText(text, x, y) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = gMeme.lines[0].color
-    gCtx.font = `${gMeme.lines[0].size}px impact`;
+    gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].fontFamily}`;
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
-    // gCtx.closePath()
-    const textWidth = gCtx.measureText(text).width + 10;
-    const textHeight = gCtx.measureText(text).fontBoundingBoxAscent
-        + gCtx.measureText(text).fontBoundingBoxDescent;
-
-    // if (gFocusRect && text.length === 1)
-    gFocusRect.startX = x - textWidth / 2
-    gFocusRect.startY = y - textHeight / 2
-    gFocusRect.endX = textWidth
-    gFocusRect.endY = textHeight
-
-
-    // drawFocusRect(x - textWidth * 0.5, y - 0.5 * textHeight, textWidth, textHeight)
 }
 
 function clearCanvasLines() {
@@ -153,11 +171,18 @@ function moveDown() {
 
 
 function switchFocusLine() {
+    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+}
+
+function setFontFamily(fontFamily) {
+    gMeme.lines.fontFamily = fontFamily
 }
 
 
-
-
+function setSelectedLine() {
+    gMeme.lines[gMeme.lines.length - 1].isSelected = true
+}
 
 
 

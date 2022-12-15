@@ -1,10 +1,12 @@
+@import url(./setup.css);
 @import url(./cmps/editor.css);
 @import url(./cmps/gallery.css);
 @import url(./cmps/header.css);
 @import url(./main.css);
-@import url(./setup.css);
+@import url(./helpers.css);
 
 
 body{
   /* margin: 0 auto;   */
+  font-family: serif;
 }

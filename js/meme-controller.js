@@ -5,47 +5,52 @@ let gCtx
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
+    addEventListeners()
     renderMeme()
     renderGallery()
-    addEventListeners()
 }
 
 function addEventListeners() {
     const input = document.querySelector('.inputTxt')
     input.addEventListener('input', onSetLineTxt)
     input.addEventListener('input', preventEnterSubmit)
+
+    const selectFont = document.querySelector('.font-select')
+    selectFont.addEventListener('select', onChangeFont)
 }
 
 //TODO-1: render image on the canvas and a line of text on top
 function renderMeme() {
     const elImg = new Image() // Create a new html img element
     elImg.src = getImg() // Send a network req to get that image, define the img src
-    elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        const linesTxt = getTxtLines()
-        console.log('linesTxt', linesTxt)
-        if (!linesTxt) return
-        linesTxt.reduce((acc, lineTxt) => {
-            console.log('acc', acc)
-            drawText(`${lineTxt}`, gElCanvas.width * 0.5, acc)
-            if (acc === 100) acc = gElCanvas.height - 100
-            else if (acc === (gElCanvas.height - 100)) acc = gElCanvas.height * 0.5
-            return acc
-        }, 100)
-        // if(gFocusRects!== []){
-        //     const selectedLineIdx = +gMeme.selectedLineIdx
-        //     console.log('gFocusRects[selectedLineIdx]', gFocusRects[0])
-            // const {startX, startY, endX, endY} = gFocusRects[selectedLineIdx]
-            const {startX, startY, endX, endY} = gFocusRect
-            drawFocusRect(startX, startY, endX, endY)
-        // }
-    }
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    const meme = getMeme()
+    console.log('meme', meme)
+    const lines = meme.lines
+    console.log('lines', lines)
+    if(lines.length===0)return
+    console.log('hi')
+    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y))
+    const selectedLine = lines[meme.selectedLineIdx]
+    markSelectedLine(selectedLine)
 }
+
+function markSelectedLine(selectedLine){
+    const textWidth = gCtx.measureText(selectedLine.txt).width + 10;
+    const textHeight = gCtx.measureText(selectedLine.txt).fontBoundingBoxAscent
+        + gCtx.measureText(selectedLine.txt).fontBoundingBoxDescent;
+
+    drawFocusRect(selectedLine.x - textWidth / 2, selectedLine.y - textHeight / 2, textWidth, textHeight)
+
+}
+
 function onSetLineTxt(ev) {
     // ev.preventDefault()
     console.log('ev', ev)
     const txt = ev.target.value
     setLineTxt(`${txt}`)
+    setSelectedLine()
     // drawText(`${txt}`, 100, 100)
     //TODO-4 render the Meme according to the input text
     renderMeme()
@@ -88,22 +93,22 @@ function preventEnterSubmit(ev) {
     ev.preventDefault()
 }
 
-function onMoveUp(){
+function onMoveUp() {
     moveUp()
     renderMeme()
 }
 
-function onMoveDown(){
+function onMoveDown() {
     moveDown()
     renderMeme()
 }
 
-function onDownload(elLink){
+function onDownload(elLink) {
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     elLink.href = imgContent
 }
 
-function onShare(){
+function onShare() {
     const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
 
     // A function to be called if request succeeds
@@ -114,4 +119,12 @@ function onShare(){
     }
     // Send the image to the server
     shareImg(imgDataUrl, onSuccess)
+}
+
+function onChangeFont(ev) {
+    const font = ev.target.value
+    setFontFamily(`${font}`)
+    // drawText(`${txt}`, 100, 100)
+    //TODO-4 render the Meme according to the input text
+    renderMeme()
 }
