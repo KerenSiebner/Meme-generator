@@ -75,15 +75,14 @@ function setLineTxt(inputTxt) {
         let y = gElCanvas.height / 2
         if (numberOfLines === 0) y = 100
         else if (numberOfLines === 1) y = gElCanvas.height - 100
-        gMeme.lines.unshift(_createLine(inputTxt.toUpperCase(), x, y))
+        gMeme.lines.push(_createLine(inputTxt.toUpperCase(), x, y))
+        gMeme.selectedLineIdx = numberOfLines
     } else {
         // const lastLineIdx = gMeme.lines.length - 1
-        gMeme.lines[0].txt = inputTxt.toUpperCase()
+        gMeme.lines[gMeme.selectedLineIdx].txt = inputTxt.toUpperCase()
     }
 }
 
-// if (i = 0) drawText(`${linesTxt[i]}`, gElCanvas.width * 0.5, 100)
-// else if (i = 1) drawText(`${linesTxt[i]}`, gElCanvas.width * 0.5, gElCanvas.height - 100)
 
 function _createLine(txt, x, y) {
     return line =
@@ -105,22 +104,17 @@ function addLine() {
     memeLines[memeLines.length - 1].isSelected = false
 }
 
-function switchLine() {
-    const numberOfLines = gMeme.lines.length
-    if (numberOfLines < 1) return
-    else {
-        //switch between first and last line
-        const firstLine = gMeme.lines[0]
-        const lastLine = gMeme.lines[numberOfLines - 1]
-        gMeme.lines[0] = lastLine
-        gMeme.lines[numberOfLines - 1] = firstLine
-    }
-}
 
 function clearInputTxt() {
     var elTxt = document.querySelector('.inputTxt')
     // console.log('elTxt.value', elTxt.value)
-    if (elTxt.value != "") elTxt.value = ""
+    if (elTxt.value !== "") elTxt.value = ""
+}
+function changePlaceHolderTxt() {
+    var elTxt = document.querySelector('.inputTxt')
+    // console.log('elTxt.value', elTxt.value)
+    const selectedBoxTxt = gMeme.lines[gMeme.selectedLineIdx].txt
+    elTxt.value = selectedBoxTxt
 }
 
 function setFontColor(color) {
@@ -141,50 +135,60 @@ function drawText(text, x, y) {
     gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].fontFamily}`;
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
-
+    
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+}
+
+function switchFocusLine() {
+    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
+    else gMeme.selectedLineIdx++
+    changePlaceHolderTxt()
 }
 
 function clearCanvasLines() {
     gMeme.lines = []
 }
 
-// function createImgs() {
-
-// }
-
 function drawFocusRect(x, y, textWidth, textHeight) {
-    gCtx.strokeStyle = 'grey'
-    gCtx.strokeRect(x, y, textWidth, textHeight)
-    // return gFocusRect
-}
-
-function moveUp() {
-    const selectedLineIdx = gMeme.selectedLineIdx
-
-}
-
-function moveDown() {
-
-}
-
-
-function switchFocusLine() {
-    if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
-    else gMeme.selectedLineIdx++
-}
-
-function setFontFamily(fontFamily) {
-    gMeme.lines.fontFamily = fontFamily
-}
-
-
-function setSelectedLine() {
-    gMeme.lines[gMeme.lines.length - 1].isSelected = true
-}
-
-
+        gCtx.strokeStyle = 'grey'
+        gCtx.strokeRect(x, y, textWidth, textHeight)
+        // return gFocusRect
+    }
+    
+    function moveUp() {
+        const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
+        selectedLine.y+=5       
+    }
+    
+    function moveDown() {
+        const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
+        selectedLine.y-=5   
+    }
+    
+    
+    
+    function setFontFamily(fontFamily) {
+        gMeme.lines.fontFamily = fontFamily
+    }
+    
+    
+    function setSelectedLine() {
+        gMeme.lines[gMeme.lines.length - 1].isSelected = true
+    }
+    
+    function switchLine() {
+        const numberOfLines = gMeme.lines.length
+        if (numberOfLines < 1) return
+        else {
+            //switch between first and last line
+            const firstLine = gMeme.lines[0]
+            const lastLine = gMeme.lines[numberOfLines - 1]
+            gMeme.lines[0] = lastLine
+            gMeme.lines[numberOfLines - 1] = firstLine
+        }
+    }
+    
 
 // const newFocusRect = gFocusRects[0]
 // const { startX, startY, endX, endY } =newFocusRect
@@ -201,3 +205,6 @@ function setSelectedLine() {
 // const newTxtLinesOrder = txtLines.reverse()
 // console.log('newTxtLinesOrder', newTxtLinesOrder)
 // gMeme.lines = newTxtLinesOrder
+    // function createImgs() {
+    
+    // }

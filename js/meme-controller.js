@@ -26,17 +26,16 @@ function renderMeme() {
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
     const meme = getMeme()
-    console.log('meme', meme)
+    // console.log('meme', meme)
     const lines = meme.lines
-    console.log('lines', lines)
-    if(lines.length===0)return
-    console.log('hi')
+    // console.log('lines', lines)
+    if (lines.length === 0) return
     lines.forEach(line => drawText(`${line.txt}`, line.x, line.y))
     const selectedLine = lines[meme.selectedLineIdx]
     markSelectedLine(selectedLine)
 }
 
-function markSelectedLine(selectedLine){
+function markSelectedLine(selectedLine) {
     const textWidth = gCtx.measureText(selectedLine.txt).width + 10;
     const textHeight = gCtx.measureText(selectedLine.txt).fontBoundingBoxAscent
         + gCtx.measureText(selectedLine.txt).fontBoundingBoxDescent;
@@ -51,8 +50,6 @@ function onSetLineTxt(ev) {
     const txt = ev.target.value
     setLineTxt(`${txt}`)
     setSelectedLine()
-    // drawText(`${txt}`, 100, 100)
-    //TODO-4 render the Meme according to the input text
     renderMeme()
 }
 
