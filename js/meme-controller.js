@@ -1,6 +1,9 @@
 'use-strict'
 let gElCanvas
 let gCtx
+let gIsNewLine=false
+let gStartPos
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
     gElCanvas = document.getElementById('my-canvas')
@@ -14,9 +17,38 @@ function addEventListeners() {
     const input = document.querySelector('.inputTxt')
     input.addEventListener('input', onSetLineTxt)
     input.addEventListener('input', preventEnterSubmit)
-
+    addMouseListeners()
+    // addTouchListeners()
     // const selectFont = document.querySelector('.font-select')
     // selectFont.addEventListener('select', onChangeFont)
+}
+
+function addMouseListeners() {
+    // gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousedown', onDown)
+    // gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchend', onUp)
+}
+
+function onDown(ev) {
+    // Get the ev pos from mouse or touch
+    const pos = getEvPos(ev)
+    console.log('pos', pos)
+    const lineClickedIndex = lineClickedIdx(pos)
+    if (lineClickedIndex ===-1) return
+    console.log('lineClickedIndex', lineClickedIndex)
+    gMeme.selectedLineIdx = lineClickedIndex
+    changePlaceHolderTxt()
+    renderMeme()
+    // setSelectedDrag(true)
+    //Save the pos we start from
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
 }
 
 //TODO-1: render image on the canvas and a line of text on top
@@ -32,6 +64,7 @@ function renderMeme() {
     if (lines.length === 0) return
     lines.forEach(line => drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align))
     const selectedLine = lines[meme.selectedLineIdx]
+    if (!selectedLine)return
     markSelectedLine(selectedLine)
 }
 
@@ -52,7 +85,6 @@ function markSelectedLine(selectedLine) {
 
 function onSetLineTxt(ev) {
     // ev.preventDefault()
-    console.log('ev', ev)
     const txt = ev.target.value
     setLineTxt(`${txt}`)
     setSelectedLine()
@@ -76,11 +108,11 @@ function onTextAlign(alignBtn) {
 }
 
 function onAddLine() {
+    gIsNewLine = true
     gFocusRects.push(gFocusRect)
     gFocusRect = {}
     addLine()
     renderMeme()
-    console.log('gFocusRects', gFocusRects)
 }
 
 function onDeleteLine() {

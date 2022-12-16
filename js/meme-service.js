@@ -78,12 +78,14 @@ function getTxtLines() {
 function setLineTxt(inputTxt) {
     //first letter create new line
     if (inputTxt.length === 1) {
+    // if (gIsNewLine && inputTxt.length === 1) {
         const numberOfLines = gMeme.lines.length
         let x = gElCanvas.width * 0.5
         let y = gElCanvas.height / 2
         if (numberOfLines === 0) y = 100
         else if (numberOfLines === 1) y = gElCanvas.height - 100
         gMeme.lines.push(_createLine(inputTxt.toUpperCase(), x, y))
+        // gIsNewLine=false
         gMeme.selectedLineIdx = numberOfLines
     } else {
         // const lastLineIdx = gMeme.lines.length - 1
@@ -102,7 +104,8 @@ function _createLine(txt, x, y) {
         fontFamily: 'impact',
         isUnderline:0,
         x,
-        y
+        y,
+        isDrag: false
     }
 }
 
@@ -110,7 +113,8 @@ function addLine() {
     gNumberOfLinesEdited++
     clearInputTxt()
     const memeLines = gMeme.lines
-    memeLines[gMeme.selectedLineIdx].isSelected = false
+    gMeme.selectedLineIdx=null
+    renderMeme()
 }
 
 function  deleteLine(){
@@ -119,6 +123,10 @@ function  deleteLine(){
     memeLines.splice(gMeme.selectedLineIdx,1)
     gMeme.lines = memeLines
     clearInputTxt()
+}
+
+function setSelectedDrag(isDrag){
+    gMeme.lines[gMeme.selectedLineIdx].isDrag=isDrag
 }
 
 
@@ -230,7 +238,25 @@ function drawFocusRect(x, y, textWidth, textHeight) {
             gMeme.lines[numberOfLines - 1] = firstLine
         }
     }
-    
+
+  function  lineClickedIdx(pos){
+    let posX=pos.x
+    let posY=pos.y
+    const lines = gMeme.lines
+    var lineIdx = lines.findIndex(checkLineClicked)
+    console.log('lineIdx', lineIdx)
+    return lineIdx
+    function checkLineClicked(line){
+        const text=line.txt
+        const lineX= line.x
+        const lineY= line.y
+        const { width ,fontBoundingBoxDescent, fontBoundingBoxAscent} = gCtx.measureText(text);
+        const height = fontBoundingBoxDescent+fontBoundingBoxAscent
+        // console.log('pos', pos)
+        return (posX>(lineX-width/2) && posX<(lineX+width/2) && +posY>(lineY-height/2) && +posY<(lineY+height/2) )
+    }
+}
+
 
 // const newFocusRect = gFocusRects[0]
 // const { startX, startY, endX, endY } =newFocusRect
