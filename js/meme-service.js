@@ -101,7 +101,15 @@ function addLine() {
     gNumberOfLinesEdited++
     clearInputTxt()
     const memeLines = gMeme.lines
-    memeLines[memeLines.length - 1].isSelected = false
+    memeLines[gMeme.selectedLineIdx].isSelected = false
+}
+
+function  deleteLine(){
+    gNumberOfLinesEdited--
+    const memeLines = gMeme.lines
+    memeLines.splice(gMeme.selectedLineIdx,1)
+    gMeme.lines = memeLines
+    clearInputTxt()
 }
 
 
@@ -133,7 +141,7 @@ function drawText(text, x, y) {
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = gMeme.lines[0].color
     gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].fontFamily}`;
-    gCtx.textAlign = 'center'
+    gCtx.textAlign = `${gMeme.lines[0].align}`
     gCtx.textBaseline = 'middle'
     
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.

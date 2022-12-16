@@ -150,6 +150,16 @@ a {
     color: inherit;
 }
 
+.delete-line-btn{
+    background-image: url(/img/trash-solid.svg);
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position-x: center;
+    background-position-y: center;
+    vertical-align: bottom;
+    background-color: red;
+}
+
 .font-alignment,
 .font-style {
     margin-bottom: 10px;

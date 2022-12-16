@@ -71,6 +71,11 @@ function onAddLine() {
     console.log('gFocusRects', gFocusRects)
 }
 
+function onDeleteLine(){
+    deleteLine()
+    renderMeme() 
+}
+
 function onSwitchFocusLine() {
     switchFocusLine()
     renderMeme()
