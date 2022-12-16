@@ -15,8 +15,8 @@ function addEventListeners() {
     input.addEventListener('input', onSetLineTxt)
     input.addEventListener('input', preventEnterSubmit)
 
-    const selectFont = document.querySelector('.font-select')
-    selectFont.addEventListener('select', onChangeFont)
+    // const selectFont = document.querySelector('.font-select')
+    // selectFont.addEventListener('select', onChangeFont)
 }
 
 //TODO-1: render image on the canvas and a line of text on top
@@ -118,8 +118,8 @@ function onShare() {
     shareImg(imgDataUrl, onSuccess)
 }
 
-function onChangeFont(ev) {
-    const font = ev.target.value
+function onChangeFont(font) {
+    // const font = ev.target.value
     setFontFamily(`${font}`)
     // drawText(`${txt}`, 100, 100)
     //TODO-4 render the Meme according to the input text

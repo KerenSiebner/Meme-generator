@@ -4,9 +4,5 @@
 @import url(./cmps/header.css);
 @import url(./main.css);
 @import url(./helpers.css);
+@import url(./cmps/icons.css);
 
-
-body{
-  /* margin: 0 auto;   */
-  font-family: serif;
-}

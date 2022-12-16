@@ -1,15 +1,12 @@
 .editor {
     display: none;
-    background-image: url(/img/bg.png);
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 
 .inputTxt {
     width: 445px;
     height: 57px;
-    box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+    /* box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff; */
     border-radius: 28px;
     background-color: #ebeef3;
     font-family: poppins-light;
@@ -26,6 +23,7 @@
     height: 53px;
     border-radius: 10px;
     font-family: poppins-light;
+    background-color: #ebeef3;
     font-size: xx-large;
 }
 
@@ -41,17 +39,30 @@
 
 
 
-.switch-line-btn {
+.switch-focus-line-btn {
     box-shadow: 1px 5px 0 #048b97, 0;
-    background-color: #ebeef3;
     background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
 }
 
 .add-line-btn {
     box-shadow: 1px 5px 0 #015d33, 0;
-    background-color: #ebeef3;
     background-image: linear-gradient(-38deg, #42eb5c 0%, #37b34a 100%);
+    margin-left: 20px;
+    margin-right: 20px;
 }
+
+.switch-line-btn {
+    box-shadow: 1px 5px 0 #602a62, 0;
+    background-image: linear-gradient(-38deg, #602a62a5 0%, #602a62c7 50%, #602a62 100%);
+}
+
+.move-up-btn,
+.move-down-btn {
+    box-shadow: 1px 5px 0 #daeb92, 0;
+    width: 40px;
+    background-image: linear-gradient(-38deg, #caeb0dbc 0%, #caeb0ddc 50%, #caeb0d 100%);
+}
+
 
 .img {
     width: 200px;
@@ -63,13 +74,14 @@ canvas {
     margin: 0 auto;
     outline: 1px solid #234985;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 30px;
+    border: 2px solid #22252c;
 }
 
 .canvas-container {
     flex-basis: 50%;
     height: 546px;
-    background-color: #22252c;
+
     /* margin: 0 auto; */
 }
 
@@ -77,12 +89,12 @@ canvas {
     /* flex-basis: 45%; */
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 2fr 1fr 1fr;
-    height: 446px;
+    grid-template-rows: repeat(5, 1fr);
+    height: 500px;
     border-radius: 20px;
-    background-color: #3e4b68;
+    background-color: #3e4b68fa;
     padding: 40px;
-    box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff;
+    /* box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff; */
     align-content: center;
 }
 
@@ -90,12 +102,13 @@ div.canvas-ctrl>* {
     margin-bottom: 25px;
 }
 
-.font-design {
+/* .font-design {
     margin-bottom: 25px;
-}
+} */
 
 .line-ctrl {
     margin-bottom: 25px;
+    text-align: center;
 }
 
 .stickers {
@@ -104,39 +117,79 @@ div.canvas-ctrl>* {
     border-radius: 45px;
     background-color: #ffffff;
     text-align: center;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
+    padding-top: 10px;
+    font-family: poppins-medium;
+}
+
+.meme-ctrl {
+    text-align: center;
 }
 
 .meme-ctrl-btn {
     width: 115px;
     height: 51px;
-    box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff;
+    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
     border-radius: 15px;
     background-color: #1e7cd3;
+    font-family: poppins-medium;
+    color: white;
+    font-size: 1em;
 }
 
+.download-btn {
+    background-color: rgba(124, 26, 131, 0.673);
+}
 
+.share-btn {
+    background-color: rgba(197, 100, 163, 0.673);
+}
 
 a {
     text-decoration: none;
     color: inherit;
 }
 
+.font-alignment,
+.font-style {
+    margin-bottom: 10px;
+    text-align: center;
+}
 
+.font-align-btn {
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position-x: center;
+    background-position-y: center;
+    vertical-align: bottom;
+}
 
-.color-pick{
-    position:absolute
+.align-center {
+    background-image: url(/img/align-center-solid.svg);
+}
+
+.align-left {
+    background-image: url(/img/align-left-solid.svg);
 
 }
 
-.font-select{
-font-family: poppins-light;
-font-size: x-large;
-width: 236px;
-height: 50px;
-box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
-border-radius: 10px;
-background-color: #ffffff;
+.align-right {
+    background-image: url(/img/align-right-solid.svg);
+
+}
+
+.color-pick {
+    position: absolute
+}
+
+.font-select {
+    font-family: poppins-medium;
+    font-size: 1.5em;
+    width: 236px;
+    height: 50px;
+    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    border-radius: 10px;
+    background-color: #ffffff;
 
 }
 
@@ -149,12 +202,12 @@ background-color: #ffffff;
 
         width: 460px;
         padding: 10px;
-        margin-top: 30px;
         margin: auto;
     }
 
     .canvas-container {
         margin-bottom: 20px;
+        margin-top: 100px;
     }
 }
 

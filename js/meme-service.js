@@ -169,7 +169,7 @@ function drawFocusRect(x, y, textWidth, textHeight) {
     
     
     function setFontFamily(fontFamily) {
-        gMeme.lines.fontFamily = fontFamily
+        gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
     }
     
     
