@@ -25,6 +25,8 @@ function onImgSelect(img) {
     renderMeme()
     gIsGallery = false
     toggleDisplayEditorOrGallery()
+    const navGallaryBtn = document.querySelector('.gallery-btn')
+    navGallaryBtn.classList.remove('active')
 }
 
 function toggleDisplayEditorOrGallery() {
@@ -36,11 +38,12 @@ function toggleDisplayEditorOrGallery() {
     console.log('gIsGallery', gIsGallery)
 }
 
-function onSwitchToGallery() {
+function onSwitchToGallery(navGallaryBtn) {
     console.log('gIsGallery', gIsGallery)
     if (gIsGallery) return
     else {
         gIsGallery = !gIsGallery
+        navGallaryBtn.classList.add('active')
         toggleDisplayEditorOrGallery()
     }
 }

@@ -11,3 +11,7 @@ function shareImg(imgDataUrl, onSuccess) {
             onSuccess(url)
         })
 }
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
