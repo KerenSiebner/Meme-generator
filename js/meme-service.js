@@ -215,8 +215,7 @@ function drawFocusRect(x, y, textWidth, textHeight) {
         const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
         selectedLine.y-=5   
     }
-    
-    
+  
     
     function setFontFamily(fontFamily) {
         gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
@@ -255,6 +254,15 @@ function drawFocusRect(x, y, textWidth, textHeight) {
         // console.log('pos', pos)
         return (posX>(lineX-width/2) && posX<(lineX+width/2) && +posY>(lineY-height/2) && +posY<(lineY+height/2) )
     }
+}
+
+function getSelectedLine(){
+    return gMeme.lines[gMeme.selectedLineIdx]
+}
+
+function moveLine(dx, dy){
+    gMeme.lines[gMeme.selectedLineIdx].x +=dx
+    gMeme.lines[gMeme.selectedLineIdx].y +=dy
 }
 
 

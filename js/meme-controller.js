@@ -18,15 +18,15 @@ function addEventListeners() {
     input.addEventListener('input', onSetLineTxt)
     input.addEventListener('input', preventEnterSubmit)
     addMouseListeners()
-    // addTouchListeners()
+    addTouchListeners()
     // const selectFont = document.querySelector('.font-select')
     // selectFont.addEventListener('select', onChangeFont)
 }
 
 function addMouseListeners() {
-    // gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousemove', onMove)
     gElCanvas.addEventListener('mousedown', onDown)
-    // gElCanvas.addEventListener('mouseup', onUp)
+    gElCanvas.addEventListener('mouseup', onUp)
 }
 
 function addTouchListeners() {
@@ -45,10 +45,31 @@ function onDown(ev) {
     gMeme.selectedLineIdx = lineClickedIndex
     changePlaceHolderTxt()
     renderMeme()
-    // setSelectedDrag(true)
+    setSelectedDrag(true)
     //Save the pos we start from
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+    const { isDrag } = getSelectedLine()
+
+    if (!isDrag) return
+    
+    const pos = getEvPos(ev)
+    // Calc the delta , the diff we moved
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    moveLine(dx, dy)
+    // Save the last pos , we remember where we`ve been and move accordingly
+    gStartPos = pos
+    // The canvas is render again after every move
+    renderMeme()
+}
+
+function onUp() {
+    setSelectedDrag(false)
+    document.body.style.cursor = 'grab'
 }
 
 //TODO-1: render image on the canvas and a line of text on top
