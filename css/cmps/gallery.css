@@ -2,9 +2,15 @@
     width: 541px;
     height: 58px;
     border-radius: 29px;
-    background-color: #0f1114;
-    /* opacity: 50%; */
-    margin-bottom: 16px;
+    background-image: url(/img/magnifying-glass-solid.svg);
+    background-repeat: no-repeat;
+    background-position-x: 450px;
+    background-position-y: 5px;
+    background-size:8%;
+    background-color: #0f1114c3;
+    color: white;
+    opacity: 50%;
+    margin-bottom: 2em;
     font-family: poppins-light;
     font-size: 1.3125em;
     padding-left: 2em;
@@ -31,7 +37,7 @@
 }
 
 
-@media (max-width: 1300px) {
+@media (max-width: 1350px) {
     .gallery {
         grid-template-columns: repeat(4, 1fr);
         margin-right: 37px;
@@ -39,7 +45,7 @@
     }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1150px) {
     .gallery {
         grid-template-columns: repeat(3, 1fr);
         margin-right: 70px;
@@ -51,15 +57,19 @@
     }
 } */
 
-@media (max-width: 780px) {
+@media (max-width: 940px) {
     .gallery {
         grid-template-columns: repeat(2, 1fr);
         margin-right: 70px;
         margin-left: 70px;
     }
+
+    .search-input{
+        margin-top: 50px;
+    }
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1350px) {
     .gallery {
         grid-template-columns: repeat(5, 1fr);
         margin-right: 37px;

@@ -21,3 +21,8 @@
 .fa.plus::before {
     content: "\2b";
 }
+
+.share-icon{
+height:20px;
+margin-right: 5px;
+}

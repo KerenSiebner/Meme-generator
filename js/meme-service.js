@@ -17,6 +17,14 @@ var gImgs = [
     { id: 8, url: 'img/8.jpg', keywords: ['funny', 'comady'] },
     { id: 9, url: 'img/9.jpg', keywords: ['baby', 'funny'] },
     { id: 10, url: 'img/10.jpg', keywords: ['politics', 'funny'] },
+    { id: 11, url: 'img/11.jpg', keywords: ['politics', 'funny'] },
+    { id: 12, url: 'img/12.jpg', keywords: ['politics', 'funny'] },
+    { id: 13, url: 'img/13.jpg', keywords: ['politics', 'funny'] },
+    { id: 14, url: 'img/14.jpg', keywords: ['politics', 'funny'] },
+    { id: 15, url: 'img/15.jpg', keywords: ['politics', 'funny'] },
+    { id: 16, url: 'img/16.jpg', keywords: ['politics', 'funny'] },
+    { id: 17, url: 'img/17.jpg', keywords: ['politics', 'funny'] },
+    { id: 18, url: 'img/18.jpg', keywords: ['politics', 'funny'] },
 ]
 
 var gMeme = {
@@ -92,6 +100,7 @@ function _createLine(txt, x, y) {
         align: 'center',
         color: 'white',
         fontFamily: 'impact',
+        isUnderline:0,
         x,
         y
     }
@@ -126,26 +135,46 @@ function changePlaceHolderTxt() {
 }
 
 function setFontColor(color) {
-    gMeme.lines[0].color = color
+    gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
 function setFontSize(fontChangeSize) {
     //if increase
-    if (fontChangeSize.dataset.fsize === '+') { gMeme.lines[0].size += 5 }
-    else { gMeme.lines[0].size -= 5 }
+    if (fontChangeSize.dataset.fsize === '+') { gMeme.lines[gMeme.selectedLineIdx].size += 5 }
+    else { gMeme.lines[gMeme.selectedLineIdx].size -= 5 }
 }
 
-function drawText(text, x, y) {
-    // gCtx.beginPath()
+function setUnderline(){
+    gMeme.lines[gMeme.selectedLineIdx].isUnderline=1
+}
+
+function setAlignment(alignTxt){
+    gMeme.lines[gMeme.selectedLineIdx].align=alignTxt
+}
+
+function drawText(text, x, y,color,size,fontFamily,isUnderline,align) {
+    gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = gMeme.lines[0].color
-    gCtx.font = `${gMeme.lines[0].size}px ${gMeme.lines[0].fontFamily}`;
-    gCtx.textAlign = `${gMeme.lines[0].align}`
+    gCtx.fillStyle = `${color}`
+    gCtx.font = `${size}px ${fontFamily}`;
+    // gCtx.textAlign = `${align}`
+    gCtx.textAlign = `center`
     gCtx.textBaseline = 'middle'
+
+    if(align==='left') x= x-100
+    else if(align==='right') x= x+100
     
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    
+    
+    if(isUnderline){
+        let { width ,fontBoundingBoxDescent, fontBoundingBoxAscent} = gCtx.measureText(text);
+        const height = fontBoundingBoxDescent+fontBoundingBoxAscent
+        gCtx.fillRect( x - width / 2, y+height/2, width, 4);
+        gCtx.stroke()   
+    }
 }
 
 function switchFocusLine() {
@@ -160,7 +189,12 @@ function clearCanvasLines() {
 
 function drawFocusRect(x, y, textWidth, textHeight) {
         gCtx.strokeStyle = 'grey'
-        gCtx.strokeRect(x, y, textWidth, textHeight)
+        gCtx.fillStyle = '#d6d1d168'
+        gCtx.beginPath();
+        gCtx.roundRect(x, y, textWidth, textHeight,[20])
+        gCtx.stroke()
+        // gCtx.strokeRect(x, y, textWidth, textHeight)
+        gCtx.fill()
         // return gFocusRect
     }
     

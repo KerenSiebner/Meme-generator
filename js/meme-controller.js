@@ -30,17 +30,23 @@ function renderMeme() {
     const lines = meme.lines
     // console.log('lines', lines)
     if (lines.length === 0) return
-    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y))
+    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align))
     const selectedLine = lines[meme.selectedLineIdx]
     markSelectedLine(selectedLine)
 }
 
 function markSelectedLine(selectedLine) {
-    const textWidth = gCtx.measureText(selectedLine.txt).width + 10;
-    const textHeight = gCtx.measureText(selectedLine.txt).fontBoundingBoxAscent
-        + gCtx.measureText(selectedLine.txt).fontBoundingBoxDescent;
+    let x= selectedLine.x
+    const y= selectedLine.y
+    const txt= selectedLine.txt
+    if (selectedLine.align === 'left') x = x - 100
+    else if (selectedLine.align === 'right') x = x + 100
 
-    drawFocusRect(selectedLine.x - textWidth / 2, selectedLine.y - textHeight / 2, textWidth, textHeight)
+    const textWidth = gCtx.measureText(txt).width + 20;
+    const textHeight = gCtx.measureText(txt).fontBoundingBoxAscent
+        + gCtx.measureText(txt).fontBoundingBoxDescent + 20;
+
+    drawFocusRect(x - textWidth / 2, y - textHeight / 2, textWidth, textHeight)
 
 }
 
@@ -63,6 +69,12 @@ function onSetFontSize(fontChangeSize) {
     renderMeme()
 }
 
+function onTextAlign(alignBtn) {
+    const alignTxt = alignBtn.dataset.align
+    setAlignment(alignTxt)
+    renderMeme()
+}
+
 function onAddLine() {
     gFocusRects.push(gFocusRect)
     gFocusRect = {}
@@ -71,9 +83,9 @@ function onAddLine() {
     console.log('gFocusRects', gFocusRects)
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     deleteLine()
-    renderMeme() 
+    renderMeme()
 }
 
 function onSwitchFocusLine() {
@@ -86,10 +98,16 @@ function onSwitchLine() {
     renderMeme()
 }
 
+function onUnderline() {
+    setUnderline()
+    renderMeme()
+}
+
 function onSave() {
     gIsGallary = true
     toggleDisplayEditorOrGallary()
 }
+
 
 function preventEnterSubmit(ev) {
     ev.preventDefault()

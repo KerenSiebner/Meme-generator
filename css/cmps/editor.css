@@ -8,10 +8,10 @@
     height: 57px;
     /* box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff; */
     border-radius: 28px;
-    background-color: #ebeef3;
+    background-color: #ebeef3f5;
     font-family: poppins-light;
-    color: #3d3d3d;
-    font-size: 25px;
+    color: #050505;
+    font-size: 1.5em;
     font-weight: 500;
     text-transform: uppercase;
     margin-bottom: 25px;
@@ -30,8 +30,8 @@
 .font-btn {
     width: 56px;
     height: 51px;
-    font-family: poppins;
-    font-size: large;
+    font-family: poppins-medium;
+    font-size: 1.5em;
     border-radius: 10px;
     box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.58);
     background-color: #ffffff;
@@ -102,9 +102,6 @@ div.canvas-ctrl>* {
     margin-bottom: 25px;
 }
 
-/* .font-design {
-    margin-bottom: 25px;
-} */
 
 .line-ctrl {
     margin-bottom: 25px;
@@ -124,15 +121,17 @@ div.canvas-ctrl>* {
 
 .meme-ctrl {
     text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .meme-ctrl-btn {
-    width: 115px;
+    width: 130px;
     height: 51px;
     /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
     border-radius: 15px;
     background-color: #1e7cd3;
-    font-family: poppins-medium;
+    font-family: poppins-light;
     color: white;
     font-size: 1em;
 }
@@ -143,6 +142,7 @@ div.canvas-ctrl>* {
 
 .share-btn {
     background-color: rgba(197, 100, 163, 0.673);
+    /* background-image: url(/img/share-nodes-solid.svg); */
 }
 
 a {
@@ -150,7 +150,7 @@ a {
     color: inherit;
 }
 
-.delete-line-btn{
+.delete-line-btn {
     background-image: url(/img/trash-solid.svg);
     background-repeat: no-repeat;
     background-size: 60%;
@@ -163,12 +163,21 @@ a {
 .font-alignment,
 .font-style {
     margin-bottom: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    padding:0 15px 0 15px;
+    /* text-align: center; */
 }
 
-.font-align-btn {
+.font-design {
+    background-color: #048b97;
+    padding: 10px 0 10px 0;
+    border-radius: 10px;
+}
+
+.font-align-btn,.font-underline {
     background-repeat: no-repeat;
-    background-size: 60%;
+    background-size: 50%;
     background-position-x: center;
     background-position-y: center;
     vertical-align: bottom;
@@ -185,11 +194,17 @@ a {
 
 .align-right {
     background-image: url(/img/align-right-solid.svg);
+    
+}
 
+.font-underline{
+    background-image: url(/img/underline-solid.svg);
 }
 
 .color-pick {
-    position: absolute
+    /* background-image: url(/img/align-right-solid.svg); */
+    position: block;
+    margin-left: 20px;
 }
 
 .font-select {
@@ -197,10 +212,10 @@ a {
     font-size: 1.5em;
     width: 236px;
     height: 50px;
-    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 5px 0 rgba(255, 255, 255, 0.58);
+    box-shadow: 1px 5px 0 #5c5c5c5e, inset 0 5px 0 rgba(255, 255, 255, 0.58);
     border-radius: 10px;
-    background-color: #ffffff;
-
+    background-color: #ffffffde;
+    text-align: center;
 }
 
 @media (max-width: 940px) {

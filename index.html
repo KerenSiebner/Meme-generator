@@ -34,11 +34,11 @@
 
     <section class="editor">
         <div class="canvas-container">
-            <canvas id="my-canvas" height="450" width="450" onclick="draw(event)"> </canvas>
+            <canvas id="my-canvas" height="500" width="500" onclick="draw(event)"> </canvas>
         </div>
         <div class="canvas-ctrl">
             <input type="text" class="inputTxt" placeholder="TEXT LINE">
-            <div class="line-ctrl">
+            <div class="line-ctrl flex space-between">
                 <button class="line-ctrl-btn move-up-btn " onclick="onMoveUp()">&#8595;</button>
                 <button class="line-ctrl-btn move-down-btn" onclick="onMoveDown()">&#8593;</button>
                 <button class="line-ctrl-btn switch-focus-line-btn" onclick="onSwitchFocusLine()">&#x21c5;</button>
@@ -48,11 +48,11 @@
             </div>
             <div class="font-design">
                 <div class="font-alignment">
-                    <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A+</button>
-                    <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A-</button>
-                    <button class="font-btn font-align-btn align-left" onclick="onTextAlign(this)" data-fsize="-"></button>
-                    <button class="font-btn font-align-btn align-center" onclick="onTextAlign(this)" data-fsize="-"></button>
-                    <button class="font-btn font-align-btn align-right" onclick="onTextAlign(this)" data-fsize="-"></button>
+                    <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="+">A <sup>+</sup></button>
+                    <button class="font-btn" onclick="onSetFontSize(this)" data-fsize="-">A <sup>-</sup></button>
+                    <button class="font-btn font-align-btn align-left" onclick="onTextAlign(this)" data-align="left"></button>
+                    <button class="font-btn font-align-btn align-center" onclick="onTextAlign(this)" data-align="center"></button>
+                    <button class="font-btn font-align-btn align-right" onclick="onTextAlign(this)" data-align="right"></button>
                 </div>
                 <div class="font-style">
                     <label for="font-select"></label>
@@ -61,6 +61,7 @@
                         <option value="serif">SERIF</option>
                         <option value="arial">ARIAL</option>
                     </select>
+                    <button class="font-btn font-underline" onclick="onUnderline()" ></button>
                     <input type="color" class="font-btn  color-pick" onchange="onSetFontColor(this.value)">
                 </div>
             </div>
@@ -70,7 +71,7 @@
                 <button class="meme-ctrl-btn download-btn">
                     <a href="#" onclick="onDownload(this)" download="my-img.jpg">Download</a>
                 </button>
-                <button class="meme-ctrl-btn share-btn" onclick="onShare()">Share</button>
+                <button class="meme-ctrl-btn share-btn" onclick="onShare()"> <img class ="share-icon" src="/img/share-nodes-solid.svg" alt=""> Share</button>
             </div>
         </div>
     </section>
