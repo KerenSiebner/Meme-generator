@@ -20,7 +20,8 @@ function onImgSelect(img) {
     const imgId = +img.dataset.id
     const selectedImg = gImgs.find(img => img.id === imgId)
     gMeme.selectedImgId = selectedImg.id
-    clearCanvasLines()
+    // clearCanvasLines()
+    setDefaultMemeLines()
     clearInputTxt()
     renderMeme()
     gIsGallery = false
@@ -35,7 +36,6 @@ function toggleDisplayEditorOrGallery() {
 
     elEditor.style.display = (gIsGallery) ? 'none' : 'flex'
     elGallery.style.display = (gIsGallery) ? 'block' : 'none'
-    console.log('gIsGallery', gIsGallery)
 }
 
 function onSwitchToGallery(navGallaryBtn) {

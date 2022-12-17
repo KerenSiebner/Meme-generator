@@ -11,6 +11,7 @@
     font-family: poppins-light;
     src: url(./fonts/Poppins/Poppins-Light.ttf)
 }
+
 @font-face {
     font-family: poppins-medium;
     src: url(./fonts/Poppins/Poppins-Medium.ttf)
@@ -29,17 +30,18 @@ html {
     background-size: cover;
 }
 
-i{
-    color:black;
+i {
+    color: black;
 }
 
 
-  body{
+body {
     /* margin: 0 auto;   */
     font-family: serif;
-  
-  }
 
-  button{
-    color:inherit;
-  }
+}
+
+button,
+select {
+    color: inherit;
+}

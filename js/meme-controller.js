@@ -1,4 +1,5 @@
 'use-strict'
+
 let gElCanvas
 let gCtx
 let gIsNewLine=false
@@ -9,8 +10,8 @@ function onInit() {
     gElCanvas = document.getElementById('my-canvas')
     gCtx = gElCanvas.getContext('2d')
     addEventListeners()
-    renderMeme()
     renderGallery()
+    renderMeme()
 }
 
 function addEventListeners() {
@@ -43,9 +44,10 @@ function onDown(ev) {
     if (lineClickedIndex ===-1) return
     console.log('lineClickedIndex', lineClickedIndex)
     gMeme.selectedLineIdx = lineClickedIndex
+    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineTxt('CLICK ME TO EDIT')
     changePlaceHolderTxt()
-    renderMeme()
     setSelectedDrag(true)
+    renderMeme()
     //Save the pos we start from
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
@@ -81,10 +83,12 @@ function renderMeme() {
     const meme = getMeme()
     // console.log('meme', meme)
     const lines = meme.lines
-    // console.log('lines', lines)
+    // console.log('lines[0].txt', lines[0].txt)
     if (lines.length === 0) return
-    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align))
+    
+    lines.forEach(line => drawText(`${line.txt}`, line.x, line.y, line.color, line.size, line.fontFamily, line.isUnderline, line.align) )
     const selectedLine = lines[meme.selectedLineIdx]
+    console.log('selectedLine', selectedLine)
     if (!selectedLine)return
     markSelectedLine(selectedLine)
 }
@@ -132,6 +136,7 @@ function onAddLine() {
     gIsNewLine = true
     gFocusRects.push(gFocusRect)
     gFocusRect = {}
+    isFirstTwoLines()
     addLine()
     renderMeme()
 }

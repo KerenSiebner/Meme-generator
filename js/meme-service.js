@@ -3,6 +3,7 @@
 var gFocusRect = {}
 var gFocusRects = []
 var gNumberOfLinesEdited = 0
+var gIsFirstTwoLines = true
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
@@ -31,24 +32,31 @@ var gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
     lines: []
-    //     {
-    //     txt:'TEXT GOES HERE',
-    //     size: 30,
-    //     align: 'center',
-    //     color: 'white',
-    //     fontFamily: 'impact',
-    //     x,
-    //     y
-    // },
-    // {
-    //     txt:'TEXT GOES HERE',
-    //     size: 30,
-    //     align: 'center',
-    //     color: 'white',
-    //     fontFamily: 'impact',
-    //     x,
-    //     y
-    // }]
+}
+
+function setDefaultMemeLines() {
+    gMeme.lines.push({
+        txt: 'CLICK ME TO EDIT',
+        size: 30,
+        align: 'center',
+        color: 'grey',
+        fontFamily: 'impact',
+        isUnderline: 0,
+        x: gElCanvas.width * 0.5,
+        y: 100,
+        isDrag: false
+    }, {
+        txt: 'CLICK ME TO EDIT',
+        size: 30,
+        align: 'center',
+        color: 'grey',
+        fontFamily: 'impact',
+        isUnderline: 0,
+        x: gElCanvas.width * 0.5,
+        y: gElCanvas.height - 100,
+        isDrag: false
+    })
+    console.log('gMeme.lines', gMeme.lines)
 }
 
 // TODO-2 
@@ -77,8 +85,9 @@ function getTxtLines() {
 //TODO-3 update gMeme from user input
 function setLineTxt(inputTxt) {
     //first letter create new line
-    if (inputTxt.length === 1) {
-    // if (gIsNewLine && inputTxt.length === 1) {
+    console.log('inputTxt', inputTxt)
+    if (inputTxt.length === 1 && !gIsFirstTwoLines) {
+        // if (gIsNewLine && inputTxt.length === 1) {
         const numberOfLines = gMeme.lines.length
         let x = gElCanvas.width * 0.5
         let y = gElCanvas.height / 2
@@ -88,9 +97,31 @@ function setLineTxt(inputTxt) {
         // gIsNewLine=false
         gMeme.selectedLineIdx = numberOfLines
     } else {
-        // const lastLineIdx = gMeme.lines.length - 1
         gMeme.lines[gMeme.selectedLineIdx].txt = inputTxt.toUpperCase()
+        // console.log('defaultLineIdx', defaultLineIdx)
+        if (inputTxt === 'CLICK ME TO EDIT') {
+            // console.loggIsFirstTwoLines', gIsFirstTwoLines)
+            clearInputTxt()
+            gMeme.lines[gMeme.selectedLineIdx].txt = ''
+            gMeme.lines[gMeme.selectedLineIdx].color = 'white'
+            if (gMeme.selectedLineIdx === 0) gMeme.lines[gMeme.selectedLineIdx].y = 100
+            else if (gMeme.selectedLineIdx === 1) gMeme.lines[gMeme.selectedLineIdx].y = gElCanvas.height - 100
+
+            // gMeme.lines.splice(gMeme.selectedLineIdx,1,_createLine('', x, y))
+            // renderMeme()
+        }
+
+        // const lastLineIdx = gMeme.lines.length - 1
     }
+}
+
+function isFirstTwoLines(){
+    const defualtLineIdx = gMeme.lines.findIndex(line => {
+        const txt = `${line.txt}`
+        return txt === 'CLICK ME TO EDIT'
+    })
+    console.log('defualtLineIdx', defualtLineIdx)
+    if (defualtLineIdx === -1) gIsFirstTwoLines = false
 }
 
 
@@ -102,7 +133,7 @@ function _createLine(txt, x, y) {
         align: 'center',
         color: 'white',
         fontFamily: 'impact',
-        isUnderline:0,
+        isUnderline: 0,
         x,
         y,
         isDrag: false
@@ -113,22 +144,21 @@ function addLine() {
     gNumberOfLinesEdited++
     clearInputTxt()
     const memeLines = gMeme.lines
-    gMeme.selectedLineIdx=null
+    gMeme.selectedLineIdx = null
     renderMeme()
 }
 
-function  deleteLine(){
+function deleteLine() {
     gNumberOfLinesEdited--
     const memeLines = gMeme.lines
-    memeLines.splice(gMeme.selectedLineIdx,1)
+    memeLines.splice(gMeme.selectedLineIdx, 1)
     gMeme.lines = memeLines
     clearInputTxt()
 }
 
-function setSelectedDrag(isDrag){
-    gMeme.lines[gMeme.selectedLineIdx].isDrag=isDrag
+function setSelectedDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
-
 
 function clearInputTxt() {
     var elTxt = document.querySelector('.inputTxt')
@@ -152,15 +182,15 @@ function setFontSize(fontChangeSize) {
     else { gMeme.lines[gMeme.selectedLineIdx].size -= 5 }
 }
 
-function setUnderline(){
-    gMeme.lines[gMeme.selectedLineIdx].isUnderline=1
+function setUnderline() {
+    gMeme.lines[gMeme.selectedLineIdx].isUnderline = 1
 }
 
-function setAlignment(alignTxt){
-    gMeme.lines[gMeme.selectedLineIdx].align=alignTxt
+function setAlignment(alignTxt) {
+    gMeme.lines[gMeme.selectedLineIdx].align = alignTxt
 }
 
-function drawText(text, x, y,color,size,fontFamily,isUnderline,align) {
+function drawText(text, x, y, color, size, fontFamily, isUnderline, align) {
     gCtx.beginPath()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
@@ -170,18 +200,18 @@ function drawText(text, x, y,color,size,fontFamily,isUnderline,align) {
     gCtx.textAlign = `center`
     gCtx.textBaseline = 'middle'
 
-    if(align==='left') x= x-100
-    else if(align==='right') x= x+100
-    
+    if (align === 'left') x = x - 100
+    else if (align === 'right') x = x + 100
+
     gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
-    
-    
-    if(isUnderline){
-        let { width ,fontBoundingBoxDescent, fontBoundingBoxAscent} = gCtx.measureText(text);
-        const height = fontBoundingBoxDescent+fontBoundingBoxAscent
-        gCtx.fillRect( x - width / 2, y+height/2, width, 4);
-        gCtx.stroke()   
+
+
+    if (isUnderline) {
+        let { width, fontBoundingBoxDescent, fontBoundingBoxAscent } = gCtx.measureText(text);
+        const height = fontBoundingBoxDescent + fontBoundingBoxAscent
+        gCtx.fillRect(x - width / 2, y + height / 2, width, 4);
+        gCtx.stroke()
     }
 }
 
@@ -196,91 +226,71 @@ function clearCanvasLines() {
 }
 
 function drawFocusRect(x, y, textWidth, textHeight) {
-        gCtx.strokeStyle = 'grey'
-        gCtx.fillStyle = '#d6d1d168'
-        gCtx.beginPath();
-        gCtx.roundRect(x, y, textWidth, textHeight,[20])
-        gCtx.stroke()
-        // gCtx.strokeRect(x, y, textWidth, textHeight)
-        gCtx.fill()
-        // return gFocusRect
-    }
-    
-    function moveUp() {
-        const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
-        selectedLine.y+=5       
-    }
-    
-    function moveDown() {
-        const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
-        selectedLine.y-=5   
-    }
-  
-    
-    function setFontFamily(fontFamily) {
-        gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
-    }
-    
-    
-    function setSelectedLine() {
-        gMeme.lines[gMeme.lines.length - 1].isSelected = true
-    }
-    
-    function switchLine() {
-        const numberOfLines = gMeme.lines.length
-        if (numberOfLines < 1) return
-        else {
-            //switch between first and last line
-            const firstLine = gMeme.lines[0]
-            const lastLine = gMeme.lines[numberOfLines - 1]
-            gMeme.lines[0] = lastLine
-            gMeme.lines[numberOfLines - 1] = firstLine
-        }
-    }
+    gCtx.strokeStyle = 'grey'
+    gCtx.fillStyle = '#d6d1d168'
+    gCtx.beginPath();
+    gCtx.roundRect(x, y, textWidth, textHeight, [20])
+    gCtx.stroke()
+    // gCtx.strokeRect(x, y, textWidth, textHeight)
+    gCtx.fill()
+    // return gFocusRect
+}
 
-  function  lineClickedIdx(pos){
-    let posX=pos.x
-    let posY=pos.y
+function moveUp() {
+    const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
+    selectedLine.y += 5
+}
+
+function moveDown() {
+    const selectedLine = gMeme.lines[gMeme.selectedLineIdx]
+    selectedLine.y -= 5
+}
+
+
+function setFontFamily(fontFamily) {
+    gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
+}
+
+
+function setSelectedLine() {
+    gMeme.lines[gMeme.lines.length - 1].isSelected = true
+}
+
+function switchLine() {
+    const numberOfLines = gMeme.lines.length
+    if (numberOfLines < 1) return
+    else {
+        //switch between first and last line
+        const firstLine = gMeme.lines[0]
+        const lastLine = gMeme.lines[numberOfLines - 1]
+        gMeme.lines[0] = lastLine
+        gMeme.lines[numberOfLines - 1] = firstLine
+    }
+}
+
+function lineClickedIdx(pos) {
+    let posX = pos.x
+    let posY = pos.y
     const lines = gMeme.lines
     var lineIdx = lines.findIndex(checkLineClicked)
     console.log('lineIdx', lineIdx)
     return lineIdx
-    function checkLineClicked(line){
-        const text=line.txt
-        const lineX= line.x
-        const lineY= line.y
-        const { width ,fontBoundingBoxDescent, fontBoundingBoxAscent} = gCtx.measureText(text);
-        const height = fontBoundingBoxDescent+fontBoundingBoxAscent
+    function checkLineClicked(line) {
+        const text = line.txt
+        const lineX = line.x
+        const lineY = line.y
+        const { width, fontBoundingBoxDescent, fontBoundingBoxAscent } = gCtx.measureText(text);
+        const height = fontBoundingBoxDescent + fontBoundingBoxAscent
         // console.log('pos', pos)
-        return (posX>(lineX-width/2) && posX<(lineX+width/2) && +posY>(lineY-height/2) && +posY<(lineY+height/2) )
+        return (posX > (lineX - width / 2) && posX < (lineX + width / 2) && +posY > (lineY - height / 2) && +posY < (lineY + height / 2))
     }
 }
 
-function getSelectedLine(){
+function getSelectedLine() {
     return gMeme.lines[gMeme.selectedLineIdx]
 }
 
-function moveLine(dx, dy){
-    gMeme.lines[gMeme.selectedLineIdx].x +=dx
-    gMeme.lines[gMeme.selectedLineIdx].y +=dy
+function moveLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
 }
-
-
-// const newFocusRect = gFocusRects[0]
-// const { startX, startY, endX, endY } =newFocusRect
-// gFocusRect.startX=startX
-// gFocusRect.startY=startY
-// gFocusRect.endX=endX
-// gFocusRect.endY=endY
-// console.log('newFocusRect', newFocusRect)
-// console.log('gFocusRects', gFocusRects)
-// console.log('gFocusRect', gFocusRect)
-
-// const txtLines = getTxtLines()
-// console.log('txtLines', txtLines)
-// const newTxtLinesOrder = txtLines.reverse()
-// console.log('newTxtLinesOrder', newTxtLinesOrder)
-// gMeme.lines = newTxtLinesOrder
-    // function createImgs() {
-    
-    // }

@@ -33,6 +33,7 @@
     font-family: poppins-medium;
     font-size: 1.5em;
     border-radius: 10px;
+    text-align: center;
     box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.58);
     background-color: #ffffff;
 }
@@ -41,7 +42,7 @@
 
 .switch-focus-line-btn {
     box-shadow: 1px 5px 0 #048b97, 0;
-    background-color:  #0c98bb;
+    background-color: #0c98bb;
     background-image: url(./img/switch-focus-line.svg);
 }
 
@@ -62,14 +63,15 @@
 .move-down-btn {
     box-shadow: 1px 5px 0 #daeb92, 0;
     width: 40px;
-    background-color:  #c164ad;
+    background-color: #c164ad;
 }
 
-.move-up-btn{
-background-image: url(./img/arrow-up.svg);
+.move-up-btn {
+    background-image: url(./img/arrow-up.svg);
 }
-.move-down-btn{
-background-image: url(./img/arrow-down.svg);
+
+.move-down-btn {
+    background-image: url(./img/arrow-down.svg);
 }
 
 .img {
@@ -123,8 +125,7 @@ div.canvas-ctrl>* {
     border-radius: 45px;
     background-color: #ffffff;
     text-align: center;
-    /* margin-bottom: 25px; */
-    padding-top: 10px;
+    padding-top: 1em;
     font-family: poppins-medium;
 }
 
@@ -137,25 +138,30 @@ div.canvas-ctrl>* {
 .meme-ctrl-btn {
     width: 130px;
     height: 51px;
-    /* box-shadow: 1px 6px 0 #165c9c, inset 0 5px 0 #ffffff; */
     border-radius: 15px;
     background-color: #1e7cd3;
     font-family: poppins-light;
     color: white;
-    font-size: 1em;
-}
-
-.download-btn {
-    background-color: rgba(124, 26, 131, 0.673);
-}
-
-.share-btn {
-    background-color: rgba(197, 100, 163, 0.673);
-    background-image: url(./img/share-nodes-solid.svg);
+    font-size: 1.1em;
     background-repeat: no-repeat;
     background-size: 15%;
     background-position-x: 10px;
     background-position-y: center;
+}
+
+.share-btn {
+    background-color:#5a85dd;
+    background-image: url(./img/share-nodes-solid.svg);
+
+}
+.download-btn {
+    background-color: rgba(197, 100, 163, 0.673);
+    background-image: url(./img/download.svg);
+    width:160px;
+}
+.save-btn {
+    background-color: #bba10f;
+    background-image: url(./img/save.svg);
 }
 
 a {
@@ -163,14 +169,14 @@ a {
     color: inherit;
 }
 
-.plus{
-    color:white;
+.plus {
+    color: white;
 }
 
 .delete-line-btn {
     background-image: url(./img/trash.svg);
     background-repeat: no-repeat;
-    background-size: 60%;
+    background-size: 50%;
     background-position-x: center;
     background-position-y: center;
     vertical-align: bottom;
@@ -179,22 +185,35 @@ a {
 
 .font-alignment,
 .font-style {
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
-    padding:0 15px 0 15px;
-    /* text-align: center; */
+    padding: 0 15px 0 15px;
 }
 
+.font-style {
+    margin-bottom: 5px;
+}
+
+.font-alignment{
+    margin-bottom: 15px;
+}
+
+label{
+    display: none;
+}
 .font-design {
     background-color: #048b97;
     padding: 10px 0 10px 0;
     border-radius: 10px;
 }
 
-.font-align-btn,.font-underline,.switch-line-btn,
+.font-align-btn,
+.font-underline,
+.switch-line-btn,
 .move-up-btn,
-.move-down-btn,.switch-focus-line-btn {
+.move-down-btn,
+.switch-focus-line-btn,
+.color-pick {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position-x: center;
@@ -213,28 +232,31 @@ a {
 
 .align-right {
     background-image: url(./img/align-right-solid.svg);
-    
+
 }
 
-.font-underline{
+.font-underline {
     background-image: url(./img/underline-solid.svg);
 }
 
 .color-pick {
-    /* background-image: url(./img/align-right-solid.svg); */
+    background-image: url(./img/color-palette.svg);
     position: block;
     margin-left: 20px;
+    padding:20px;
+    background-size: 70%;
 }
 
 .font-select {
     font-family: poppins-medium;
     font-size: 1.5em;
-    width: 236px;
+    width: 250px;
     height: 50px;
     box-shadow: 1px 5px 0 #5c5c5c5e, inset 0 5px 0 rgba(255, 255, 255, 0.58);
     border-radius: 10px;
-    background-color: #ffffffde;
+    background-color: white;
     text-align: center;
+    margin-right:20px
 }
 
 @media (max-width: 940px) {
