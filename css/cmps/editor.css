@@ -42,7 +42,7 @@
 .switch-focus-line-btn {
     box-shadow: 1px 5px 0 #048b97, 0;
     background-color:  #0c98bb;
-    background-image: url(/img/switch-focus-line.svg);
+    background-image: url(./img/switch-focus-line.svg);
 }
 
 .add-line-btn {
@@ -55,7 +55,7 @@
 .switch-line-btn {
     box-shadow: 1px 5px 0 #602a62, 0;
     background-color: #602a62;
-    background-image: url(/img/switch-line.svg);
+    background-image: url(./img/switch-line.svg);
 }
 
 .move-up-btn,
@@ -66,10 +66,10 @@
 }
 
 .move-up-btn{
-background-image: url(/img/arrow-up.svg);
+background-image: url(./img/arrow-up.svg);
 }
 .move-down-btn{
-background-image: url(/img/arrow-down.svg);
+background-image: url(./img/arrow-down.svg);
 }
 
 .img {
@@ -150,7 +150,7 @@ div.canvas-ctrl>* {
 
 .share-btn {
     background-color: rgba(197, 100, 163, 0.673);
-    /* background-image: url(/img/share-nodes-solid.svg); */
+    /* background-image: url(./img/share-nodes-solid.svg); */
 }
 
 a {
@@ -163,7 +163,7 @@ a {
 }
 
 .delete-line-btn {
-    background-image: url(/img/trash.svg);
+    background-image: url(./img/trash.svg);
     background-repeat: no-repeat;
     background-size: 60%;
     background-position-x: center;
@@ -198,25 +198,25 @@ a {
 }
 
 .align-center {
-    background-image: url(/img/align-center-solid.svg);
+    background-image: url(./img/align-center-solid.svg);
 }
 
 .align-left {
-    background-image: url(/img/align-left-solid.svg);
+    background-image: url(./img/align-left-solid.svg);
 
 }
 
 .align-right {
-    background-image: url(/img/align-right-solid.svg);
+    background-image: url(./img/align-right-solid.svg);
     
 }
 
 .font-underline{
-    background-image: url(/img/underline-solid.svg);
+    background-image: url(./img/underline-solid.svg);
 }
 
 .color-pick {
-    /* background-image: url(/img/align-right-solid.svg); */
+    /* background-image: url(./img/align-right-solid.svg); */
     position: block;
     margin-left: 20px;
 }

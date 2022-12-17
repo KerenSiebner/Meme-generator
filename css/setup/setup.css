@@ -39,3 +39,7 @@ i{
     font-family: serif;
   
   }
+
+  button{
+    color:inherit;
+  }
