@@ -41,7 +41,8 @@
 
 .switch-focus-line-btn {
     box-shadow: 1px 5px 0 #048b97, 0;
-    background-image: linear-gradient(-38deg, #66c4dc 0%, #40b1ce 50%, #0c98bb 100%);
+    background-color:  #0c98bb;
+    background-image: url(/img/switch-focus-line.svg);
 }
 
 .add-line-btn {
@@ -53,16 +54,23 @@
 
 .switch-line-btn {
     box-shadow: 1px 5px 0 #602a62, 0;
-    background-image: linear-gradient(-38deg, #602a62a5 0%, #602a62c7 50%, #602a62 100%);
+    background-color: #602a62;
+    background-image: url(/img/switch-line.svg);
 }
 
 .move-up-btn,
 .move-down-btn {
     box-shadow: 1px 5px 0 #daeb92, 0;
     width: 40px;
-    background-image: linear-gradient(-38deg, #caeb0dbc 0%, #caeb0ddc 50%, #caeb0d 100%);
+    background-color:  #c164ad;
 }
 
+.move-up-btn{
+background-image: url(/img/arrow-up.svg);
+}
+.move-down-btn{
+background-image: url(/img/arrow-down.svg);
+}
 
 .img {
     width: 200px;
@@ -150,8 +158,12 @@ a {
     color: inherit;
 }
 
+.plus{
+    color:white;
+}
+
 .delete-line-btn {
-    background-image: url(/img/trash-solid.svg);
+    background-image: url(/img/trash.svg);
     background-repeat: no-repeat;
     background-size: 60%;
     background-position-x: center;
@@ -175,7 +187,9 @@ a {
     border-radius: 10px;
 }
 
-.font-align-btn,.font-underline {
+.font-align-btn,.font-underline,.switch-line-btn,
+.move-up-btn,
+.move-down-btn,.switch-focus-line-btn {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position-x: center;
