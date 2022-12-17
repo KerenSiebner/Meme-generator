@@ -54,7 +54,7 @@ header {
     border:1px;
 }
 
-@media (max-width: 780px) {
+@media (max-width: 940px) {
     .main-header {
         position: fixed;
         width: 100%;
@@ -110,7 +110,7 @@ header {
     }
 }
 
-@media (min-width: 780px) {
+@media (min-width: 940px) {
     .main-header .main-nav li {
         /* box-shadow: -1px 0 0 #1d1d1d; */
     }

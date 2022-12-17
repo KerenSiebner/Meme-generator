@@ -102,6 +102,7 @@ canvas {
     border-radius: 20px;
     background-color: #3e4b68fa;
     padding: 40px;
+    padding-top: 60px;
     /* box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff; */
     align-content: center;
 }
@@ -150,7 +151,11 @@ div.canvas-ctrl>* {
 
 .share-btn {
     background-color: rgba(197, 100, 163, 0.673);
-    /* background-image: url(./img/share-nodes-solid.svg); */
+    background-image: url(./img/share-nodes-solid.svg);
+    background-repeat: no-repeat;
+    background-size: 15%;
+    background-position-x: 10px;
+    background-position-y: center;
 }
 
 a {
@@ -239,7 +244,7 @@ a {
 
     .canvas-ctrl {
 
-        width: 460px;
+        width: 500px;
         padding: 10px;
         margin: auto;
     }
