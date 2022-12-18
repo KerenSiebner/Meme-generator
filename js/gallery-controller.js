@@ -42,7 +42,10 @@ function onSwitchToGallery(navGallaryBtn) {
     console.log('gIsGallery', gIsGallery)
     if (gIsGallery) return
     else {
+<<<<<<< HEAD
         toggleMenu()
+=======
+>>>>>>> 609997e (fixed new pic reset, removed up downn manual arrows)
         gMeme.lines.splice(0,gMeme.lines.length)
         gIsGallery = !gIsGallery
         navGallaryBtn.classList.add('active')
