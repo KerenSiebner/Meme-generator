@@ -117,6 +117,7 @@ div.canvas-ctrl>* {
 .line-ctrl {
     margin-bottom: 25px;
     text-align: center;
+    justify-content: center;
 }
 
 .stickers {
