@@ -6,7 +6,7 @@
 .inputTxt {
     width: 445px;
     height: 57px;
-    /* box-shadow: 1px 5px 0 #bbc4d1, inset 0 5px 0 #ffffff; */
+    border-width: 1px;
     border-radius: 28px;
     background-color: #ebeef3f5;
     font-family: poppins-light;
@@ -19,6 +19,7 @@
 }
 
 .line-ctrl-btn {
+    border-width: 1px;
     width: 57px;
     height: 53px;
     border-radius: 10px;
@@ -34,10 +35,10 @@
     font-size: 1.5em;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 1px 5px 0 rgba(92, 92, 92, 0.55), inset 0 2px 0 rgba(255, 255, 255, 0.58);
+    border-width: 1px;
+    box-shadow:  5px 0 rgb(92 92 92 / 28%), inset 0 1px 0 rgb(255 255 255 / 58%);
     background-color: #ffffff;
 }
-
 
 
 .switch-focus-line-btn {
@@ -48,30 +49,10 @@
 
 .add-line-btn {
     box-shadow: 1px 5px 0 #015d33, 0;
-    background-image: linear-gradient(-38deg, #42eb5c 0%, #37b34a 100%);
+    background-color: #37b34a;
+    background-image: url(./img/plus.svg);
     margin-left: 20px;
     margin-right: 20px;
-}
-
-.switch-line-btn {
-    box-shadow: 1px 5px 0 #602a62, 0;
-    background-color: #602a62;
-    background-image: url(./img/switch-line.svg);
-}
-
-.move-up-btn,
-.move-down-btn {
-    box-shadow: 1px 5px 0 #daeb92, 0;
-    width: 40px;
-    background-color: #c164ad;
-}
-
-.move-up-btn {
-    background-image: url(./img/arrow-up.svg);
-}
-
-.move-down-btn {
-    background-image: url(./img/arrow-down.svg);
 }
 
 .img {
@@ -214,7 +195,8 @@ label{
 .move-up-btn,
 .move-down-btn,
 .switch-focus-line-btn,
-.color-pick {
+.color-pick,
+.add-line-btn {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position-x: center;
@@ -281,3 +263,24 @@ label{
 @media (min-width: 940px) {
     .gallery {}
 }
+
+/* .switch-line-btn {
+    box-shadow: 1px 5px 0 #602a62, 0;
+    background-color: #602a62;
+    background-image: url(./img/switch-line.svg);
+} */
+
+/* .move-up-btn,
+.move-down-btn {
+    box-shadow: 1px 5px 0 #daeb92, 0;
+    width: 40px;
+    background-color: #c164ad;
+}
+
+.move-up-btn {
+    background-image: url(./img/arrow-up.svg);
+}
+
+.move-down-btn {
+    background-image: url(./img/arrow-down.svg);
+} */
