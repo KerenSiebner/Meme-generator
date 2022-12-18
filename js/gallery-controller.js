@@ -42,6 +42,7 @@ function onSwitchToGallery(navGallaryBtn) {
     console.log('gIsGallery', gIsGallery)
     if (gIsGallery) return
     else {
+        toggleMenu()
         gMeme.lines.splice(0,gMeme.lines.length)
         gIsGallery = !gIsGallery
         navGallaryBtn.classList.add('active')
