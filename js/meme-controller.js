@@ -182,6 +182,8 @@ function onMoveDown() {
 }
 
 function onDownload(elLink) {
+    gMeme.selectedLineIdx=null
+    renderMeme()
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     elLink.href = imgContent
 }
