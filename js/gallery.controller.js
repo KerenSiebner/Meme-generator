@@ -6,7 +6,9 @@ var gIsGallery = true
 
 function renderGallery() {
     const elGallery = document.querySelector('.gallery')
-    const imgs = getImgs()
+    // const imgs = getImgs()
+    const imgs = getMemes()
+    console.log('imgs', imgs)
     let strHTMLs = []
     imgs.forEach(img => {
         strHTMLs.push(`<img src="${img.url}" data-id="${img.id}" class="img img${img.id}" onclick="onImgSelect(this)">`)
