@@ -4,6 +4,7 @@ let gElCanvas
 let gCtx
 let gIsNewLine=false
 let gStartPos
+
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
@@ -17,6 +18,8 @@ function onInit() {
 function addEventListeners() {
     const input = document.querySelector('.inputTxt')
     input.addEventListener('input', onSetLineTxt)
+    // const searchKeyword = document.querySelector('.search-input')
+    // searchKeyword.addEventListener('input', onFilterMemes)
     // input.addEventListener('input', preventEnterSubmit)
     addMouseListeners()
     addTouchListeners()
@@ -46,7 +49,7 @@ function onDown(ev) {
     gMeme.selectedLineIdx = lineClickedIndex
     // window.addEventListener('keypress', onSetLineTxt)
 
-    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineTxt('CLICK ME TO EDIT')
+    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineProperties('CLICK ME TO EDIT')
     changePlaceHolderTxt()
     setSelectedDrag(true)
     renderMeme()
@@ -119,8 +122,8 @@ function onSetLineTxt(ev) {
     let txt = ev.target.value
     if(!txt) txt = ev.key
     // setSelectedLine()
-    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT') setLineTxt('CLICK ME TO EDIT')
-    setLineTxt(`${txt}`)
+    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT') setLineProperties('CLICK ME TO EDIT')
+    setLineProperties(`${txt}`)
 
     renderMeme()
 }
@@ -192,6 +195,8 @@ function onMoveDown() {
 }
 
 function onDownload(elLink) {
+    gMeme.selectedLineIdx=null
+    renderMeme()
     const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
     elLink.href = imgContent
 }
@@ -215,4 +220,9 @@ function onChangeFont(font) {
     // drawText(`${txt}`, 100, 100)
     //TODO-4 render the Meme according to the input text
     renderMeme()
+}
+
+function onFilterMemes(inputTxt){
+    getMemes(inputTxt)
+    
 }
