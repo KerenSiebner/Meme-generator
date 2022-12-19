@@ -4,6 +4,7 @@ let gElCanvas
 let gCtx
 let gIsNewLine=false
 let gStartPos
+
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
@@ -17,7 +18,9 @@ function onInit() {
 function addEventListeners() {
     const input = document.querySelector('.inputTxt')
     input.addEventListener('input', onSetLineTxt)
-    input.addEventListener('input', preventEnterSubmit)
+    // const searchKeyword = document.querySelector('.search-input')
+    // searchKeyword.addEventListener('input', onFilterMemes)
+    // input.addEventListener('input', preventEnterSubmit)
     addMouseListeners()
     addTouchListeners()
     // const selectFont = document.querySelector('.font-select')
@@ -39,18 +42,24 @@ function addTouchListeners() {
 function onDown(ev) {
     // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
-    console.log('pos', pos)
+    // console.log('pos', pos)
     const lineClickedIndex = lineClickedIdx(pos)
     if (lineClickedIndex ===-1) return
-    console.log('lineClickedIndex', lineClickedIndex)
+    // console.log('lineClickedIndex', lineClickedIndex)
     gMeme.selectedLineIdx = lineClickedIndex
-    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineTxt('CLICK ME TO EDIT')
+    // window.addEventListener('keypress', onSetLineTxt)
+
+    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT')  setLineProperties('CLICK ME TO EDIT')
     changePlaceHolderTxt()
     setSelectedDrag(true)
     renderMeme()
     //Save the pos we start from
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
+}
+
+function test(ev){
+    console.log('ev.key', `${ev.target.value}`)
 }
 
 function onMove(ev) {
@@ -110,9 +119,12 @@ function markSelectedLine(selectedLine) {
 
 function onSetLineTxt(ev) {
     // ev.preventDefault()
-    const txt = ev.target.value
-    setLineTxt(`${txt}`)
-    setSelectedLine()
+    let txt = ev.target.value
+    if(!txt) txt = ev.key
+    // setSelectedLine()
+    if (gMeme.lines[gMeme.selectedLineIdx].txt === 'CLICK ME TO EDIT') setLineProperties('CLICK ME TO EDIT')
+    setLineProperties(`${txt}`)
+
     renderMeme()
 }
 
@@ -138,6 +150,7 @@ function onAddLine() {
     gFocusRect = {}
     isFirstTwoLines()
     addLine()
+    setSelectedLine()
     renderMeme()
 }
 
@@ -207,4 +220,9 @@ function onChangeFont(font) {
     // drawText(`${txt}`, 100, 100)
     //TODO-4 render the Meme according to the input text
     renderMeme()
+}
+
+function onFilterMemes(inputTxt){
+    getMemes(inputTxt)
+    
 }
