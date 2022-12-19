@@ -6,7 +6,9 @@ var gIsGallery = true
 
 function renderGallery() {
     const elGallery = document.querySelector('.gallery')
-    const imgs = getImgs()
+    // const imgs = getImgs()
+    const imgs = getMemes()
+    console.log('imgs', imgs)
     let strHTMLs = []
     imgs.forEach(img => {
         strHTMLs.push(`<img src="${img.url}" data-id="${img.id}" class="img img${img.id}" onclick="onImgSelect(this)">`)
@@ -42,10 +44,7 @@ function onSwitchToGallery(navGallaryBtn) {
     console.log('gIsGallery', gIsGallery)
     if (gIsGallery) return
     else {
-<<<<<<< HEAD
         toggleMenu()
-=======
->>>>>>> 609997e (fixed new pic reset, removed up downn manual arrows)
         gMeme.lines.splice(0,gMeme.lines.length)
         gIsGallery = !gIsGallery
         navGallaryBtn.classList.add('active')
