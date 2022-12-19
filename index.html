@@ -16,6 +16,7 @@
         <nav class="main-nav">
             <ul class="flex clean-list nav-list">
                 <li ><button href="#" class="gallery-btn active" onclick="onSwitchToGallery(this)">Gallary</button></li>
+                <li><a href="#">Meme</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </nav>
@@ -26,7 +27,8 @@
 
     <section class="gallery-section">
         <form id="search" role="search">
-<!--             <input type="search" class="search-input" name="search" placeholder="Search"> -->
+            <!-- <input type="search" class="search-input" name="search" placeholder="Search" onchange="onFilterMemes(this.value)" > -->
+            <!-- onchange="onFilterMemes(this.value)" -->
             <!-- <input value="Submit" type="submit"> -->
         </form>
         <div class="gallery"></div>
@@ -67,7 +69,7 @@
             </div>
             <div class="stickers">STICKERS GO HERE</div>
             <div class="meme-ctrl">
-<!--                 <button class="meme-ctrl-btn save-btn" onclick="onSave()">&nbsp;&nbsp;Save</button> -->
+                <!-- <button class="meme-ctrl-btn save-btn" onclick="onSave()">&nbsp;&nbsp;Save</button> -->
                 <button class="meme-ctrl-btn download-btn">
                     <a href="#" onclick="onDownload(this)" download="my-img.jpg">&nbsp;&nbsp; Download</a>
                 </button>
